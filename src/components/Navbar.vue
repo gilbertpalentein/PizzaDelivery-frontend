@@ -11,17 +11,17 @@
         </b-icon>
         <span style="margin-left: 0.5rem">Home</span>
       </b-navbar-item>
-      <b-navbar-item href="/market">
+      <b-navbar-item href="/menu">
         <b-icon
           pack="fas"
-          icon="shopping-bag"
+          icon="pizza-slice"
           size="is-small"
           type="is-primary"
         >
         </b-icon>
         <span style="margin-left: 0.5rem">Menu</span>
       </b-navbar-item>
-      <b-navbar-item href="/cart">
+      <b-navbar-item href="/order">
         <b-icon
           pack="fas"
           icon="shopping-cart"
@@ -31,12 +31,12 @@
         </b-icon>
         <span style="margin-left: 0.5rem">Order Now</span>
       </b-navbar-item>
-      <b-navbar-item href="/wishlist">
-        <b-icon pack="fas" icon="heart" size="is-small" type="is-primary">
+      <b-navbar-item href="/about">
+        <b-icon pack="fas" icon="store" size="is-small" type="is-primary">
         </b-icon>
         <span style="margin-left: 0.5rem">About Us</span>
       </b-navbar-item>
-      <b-navbar-item href="/signup">
+      <b-navbar-item href="/login">
         <b-icon pack="fas" icon="user" size="is-small" type="is-primary">
         </b-icon>
         <span style="margin-left: 0.5rem">Login</span>

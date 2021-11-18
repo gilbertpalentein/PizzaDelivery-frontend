@@ -116,7 +116,7 @@
             <div class="level-right is-flex" style="width: 100%">
               <b-button
                 tag="router-link"
-                to="/market"
+                to="/menu"
                 type="is-light"
                 style="margin-right: 12px"
                 ><b>Continue Shopping</b></b-button

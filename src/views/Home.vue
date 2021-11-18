@@ -8,9 +8,6 @@
         :index="index"
       />
     </transition-group>
-    <b-button tag="router-link" to="/market" type="is-primary"
-      >SHOP NOW</b-button
-    >
   </div>
 </template>
 
@@ -20,11 +17,11 @@ export default {
   data: () => {
     return {
       cards: [
-        { img: "/pizza1.png", grid: "card-3-1" },
-        { img: "/pizza2.jpg", grid: "card-1-1" },
-        { img: "/pizza3.jpg", grid: "card-1-1" },
-        { img: "/pizza4.jpg", grid: "card-1-1" },
-        { img: "/pizza5.png", grid: "card-3-1" },
+        { img: "/home/pizza1.png", grid: "card-3-1" },
+        { img: "/home/pizza2.jpg", grid: "card-1-1" },
+        { img: "/home/pizza3.jpg", grid: "card-1-1" },
+        { img: "/home/pizza4.jpg", grid: "card-1-1" },
+        { img: "/home/pizza5.png", grid: "card-3-1" },
       ],
     };
   },
