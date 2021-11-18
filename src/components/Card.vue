@@ -3,6 +3,7 @@
     class and style bindings with computed properties,
     for cleaner template code.
   -->
+
   <div class="card" :class="gridClass" :style="gridStyle"></div>
 </template>
 
@@ -41,7 +42,7 @@ export default {
   */
 .card {
   width: 100%;
-  height: 200px;
+  height: 225px;
   background-position: center;
   background-size: cover;
 }
