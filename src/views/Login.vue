@@ -82,7 +82,7 @@ export default {
   background-color: rgba(250, 250, 250, 0.295);
 }
 .bgLogin {
-  background-image: url("../assets/BgLogin.png");
+  background-image: url("../assets/login/BgLogin.png");
   background-repeat: no-repeat;
   overflow: hidden;
   background-size: cover;

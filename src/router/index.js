@@ -5,11 +5,11 @@ Vue.use(VueRouter);
 
 // add component
 import Home from '../views/Home.vue';
-import Market from '../views/Market.vue';
-import Cart from '../views/Cart.vue';
+import Menu from '../views/Menu.vue';
 import DetailProduct from '../views/DetailProduct.vue';
-import Signup from '../views/Signup.vue';
-import Wish from '../views/Wish.vue';
+import Order from '../views/Order.vue';
+import Login from '../views/Login.vue';
+import About from '../views/About.vue';
 import Transactions from '../views/Transactions.vue';
 import DetailTransaction from '../views/DetailTransaction.vue';
 
@@ -20,14 +20,14 @@ const routes = [
     component: Home,
   },
   {
-    path: '/market',
-    name: 'market',
-    component: Market,
+    path: '/menu',
+    name: 'menu',
+    component: Menu,
   },
   {
-    path: '/cart',
-    name: 'cart',
-    component: Cart,
+    path: '/order',
+    name: 'order',
+    component: Order,
   },
   {
     path: '/product/:categoryId/:productId',
@@ -35,14 +35,14 @@ const routes = [
     component: DetailProduct,
   },
   {
-    path: '/signup',
-    name: 'SignUp',
-    component: Signup,
+    path: '/login',
+    name: 'login',
+    component: Login,
   },
   {
-    path: '/wishlist',
-    name: 'wishlist',
-    component: Wish,
+    path: '/About',
+    name: 'About',
+    component: About,
   },
   {
     path: '/transactions',

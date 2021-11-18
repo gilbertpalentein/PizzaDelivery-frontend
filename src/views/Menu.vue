@@ -2,7 +2,7 @@
   <div class="columns is-vcentered is-flex" style="flex-direction: column">
     <div class="column">
       <h1 style="padding: 12px 48px" class="has-text-centered title">
-        Millenial Catalog
+        Our Menu
       </h1>
     </div>
     <div>
