@@ -1,161 +1,56 @@
 <template>
-  <div class="columns is-vcentered is-flex" style="flex-direction: column">
-    <div class="column">
-      <h1 style="padding: 12px 48px" class="has-text-centered title">
-        Your Wishlist
-      </h1>
-    </div>
-    <!-- <div>
-      <b-field>
-        <b-select
-          placeholder="Select a customer"
-          icon="user"
-          value="user"
-          @onSelect="onSelect"
-        >
-          <option
-            v-for="(customer, index) in customers"
-            :key="customer.id"
-            :index="index"
-            value="customer.id"
-          >
-            {{ customer.name }}
-          </option>
-        </b-select>
-      </b-field>
-    </div> -->
-    <div
-      v-if="products.length != 0"
-      class="columns is-multiline"
-      style="width: 100%; padding: 12px 48px"
-    >
-      <div
-        class="column is-one-third"
-        v-for="(product, index) in products"
-        :key="product.id"
-        :index="index"
-      >
-        <div class="card">
-          <div class="card-content">
-            <div class="content">
-              <figure style="text-align: center; margin: 0">
-                <img
-                  class="image-product"
-                  :src="require(`@/${product.image_url}`)"
-                />
-              </figure>
-              <router-link
-                :to="{
-                  path: '/product/' + product.category_id + '/' + product.id,
-                }"
-              >
-                <a class="product-name"
-                  ><strong>{{ product.name }}</strong></a
-                >
-              </router-link>
-              <p class="price">
-                Rp. {{ parseInt(product.price).toLocaleString("id-Id") }}
-              </p>
-              <div>
-                <!-- <b-numberinput
-                  min="1"
-                  size="is-small"
-                  controls-position="compact"
-                ></b-numberinput> -->
-                <b-button
-                  type="is-danger"
-                  expanded
-                  icon-left="trash"
-                  @click="propsDeleteItem(product)"
-                  >Remove from Wishlist</b-button
-                >
-              </div>
-            </div>
-          </div>
+  <div class="bgAbout">
+      <div class="content">
+        
+        <div class="column">
+          <h1 style="padding: 12px 48px" class="has-text-centered title">
+            About Us
+          </h1>
         </div>
-      </div>
 
-      <b-loading
-        :is-full-page="true"
-        v-model="isLoading"
-        :can-cancel="true"
-      ></b-loading>
-    </div>
+        <center>
+          <img :src="require(`@/assets/pp_logo.png`)" width="200" >
+          <div class="cnt">
+            <p class="has-text-left intro title is-4 *x-6">
+              Kenalin kami Pizza Pizza
+            </p>
+            <p class="has-text-justified title is-4 *x-6">
+              Pizza Pizza adalah sebuah perusahaan pizza dimana kami menyediakan pizza delivery secara daring.
+              Dalam masa pandemi ini terutama ketika kebijakan PPKM sedang dijalankan, ada berbagai kendala yang dialami baik oleh pemilik usaha pizza maupun oleh pembeli.
+              Dengan menggunakan teknologi, proses bisnis penjualan pizza dapat dilakukan secara online. Sehingga beberapa kendala tersebut dapat diatasi.
+            </p>
+            <p class="has-text-justified title is-4 *x-6">
+              Pizza merupakan makanan cepat saji yang umum ditemukan tersebar di berbagai kota. Kecenderungan yang terjadi pada bidang makanan cepat saji adalah penyajian yang cepat dan mudahnya akses kepada makanan tersebut. Tetapi di masa pandemi ini, jarang sekali orang yang pergi ke lokasi untuk membeli pizza. Hal ini menimbulkan suatu kebutuhan agar masyarakat dapat tetap membeli tanpa harus datang ke lokasi.
+            </p>
+          </div>
+        </center>
 
-    <div
-      style="padding: 12px 48px"
-      v-else
-      class="level has-text-grey has-text-centered"
-    >
-      <p>Wishlist is empty!</p>
     </div>
   </div>
 </template>
 
-<script>
-import axios from "axios";
 
-export default {
-  props: ["currentCustomerId"],
-  mounted() {
-    console.log(this.currentCustomerId);
-    this.fetchData();
-    this.fetchCustomer();
-  },
-  data() {
-    return {
-      isLoading: false,
-      products: [],
-    };
-  },
-  methods: {
-    async fetchData() {
-      try {
-        const res = await axios.get("/wishlists/" + this.currentCustomerId);
-        this.products = res.data;
-      } catch (error) {
-        this.products = [];
-      }
-    },
-    propsDeleteItem(item) {
-      this.$buefy.dialog.confirm({
-        title: "Delete this item from wishlist?",
-        message:
-          "Item that has been <b>deleted</b> will not be count as your item again!",
-        type: "is-danger",
-        hasIcon: true,
-        icon: "times-circle",
-        iconPack: "fa",
-        cancelText: "No",
-        confirmText: "Yes",
-        onConfirm: () => this.removeFromWishlist(item),
-      });
-    },
-    async removeFromWishlist(item) {
-      await axios.delete(
-        `/wishlists/` + this.currentCustomerId + "/" + item.id
-      );
-      await this.fetchData();
-    },
-    onSelect(value) {
-      this.user = value;
-    },
-  },
-};
+
+<script>
+
 </script>
 
 <style scoped>
-.image-product {
-  max-height: 300px;
-  height: 300px;
+.bgAbout {
+  background-image: url("../assets/about/about_bg.png");
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-size: cover;
 }
-
-.product-name {
-  font-size: 20px;
-  margin-bottom: 0 !important;
+.content {
+  background-color: white;
+  opacity: 95%;
 }
-
-.price {
-  color: gray;
+.intro {
+  color: red;
+}
+.cnt {
+  width: 80%;
+  height: 400px;
 }
 </style>
