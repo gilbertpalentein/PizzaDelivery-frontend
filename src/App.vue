@@ -52,5 +52,10 @@ export default {
 
 <style lang="scss">
 @import "../scss/main.scss";
+
+.app {
+  background-color: #ececec;
+  height: 100%;
+}
 </style>
 
