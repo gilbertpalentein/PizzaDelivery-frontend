@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <transition-group appear name="slide-in" class="grid-wrapper" tag="div">
-      <Card
-        v-for="(card, index) in cards"
-        :key="'card' + index"
-        :item="card"
-        :index="index"
-      />
-    </transition-group>
+    <router-link to="/order">
+      <transition-group appear name="slide-in" class="grid-wrapper" tag="div">
+        <Card
+          v-for="(card, index) in cards"
+          :key="'card' + index"
+          :item="card"
+          :index="index"
+        />
+      </transition-group>
+    </router-link>
   </div>
 </template>
 
