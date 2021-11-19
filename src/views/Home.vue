@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Card from "../components/Card";
+import Card from "../components/HomeCard";
 export default {
   data: () => {
     return {

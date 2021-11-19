@@ -25,7 +25,7 @@ export default {
 <style lang="scss" scoped>
 .card {
   width: 100%;
-  height: 225px;
+  height: 250px;
   background-position: center;
   background-size: cover;
 }
