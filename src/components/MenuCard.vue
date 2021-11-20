@@ -2,6 +2,7 @@
   <div class="card" :class="gridClass" :style="gridStyle">
     <div id="menu">
       <button class="button" @click="showModal = true">Pizza Name</button>
+      <p class="price">Rp. 20.000</p>
       <transition name="fade" appear>
         <div
           class="modal-overlay"
@@ -18,6 +19,7 @@
             nesciunt neque possimus molestiae?
           </p>
           <button class="button" @click="showModal = false">Close</button>
+          <button class="button BuyButton">Buy (harganya)</button>
         </div>
       </transition>
     </div>
@@ -94,6 +96,29 @@ export default {
   &:hover {
     box-shadow: 6px 6px rgba(0, 0, 0, 0.6);
   }
+}
+
+.price {
+  display: inline-block;
+  margin-top: 61%;
+  margin-left: 40%;
+  border-radius: 5px;
+
+  background-color: white;
+  font-size: 20px;
+  font-weight: 750;
+  color: black;
+
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
+  transition: 0.4s ease-out;
+
+  &:hover {
+    box-shadow: 6px 6px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.BuyButton {
+  margin-left: 15%;
 }
 
 .modal-overlay {
