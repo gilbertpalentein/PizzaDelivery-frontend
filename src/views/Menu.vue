@@ -15,9 +15,15 @@
 
 <script>
 import Card from "../components/MenuCard";
+import axios from "axios";
+
 export default {
+  mounted() {
+    this.fetchData()
+  },
   data: () => {
     return {
+      products: [],
       cards: [
         { img: "/menu/beef-delight.png", grid: "card-1-1-1" },
         { img: "/menu/beef-pepperoni-feast.png", grid: "card-1-1-1" },
@@ -37,6 +43,13 @@ export default {
   },
   components: {
     Card,
+  },
+  methods: {
+    async fetchData() {
+      const res = await axios.get("/user/menu");
+      this.products = res.data;
+      console.log(this.products);
+    },
   },
 };
 </script>
