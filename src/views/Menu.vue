@@ -19,19 +19,19 @@ export default {
   data: () => {
     return {
       cards: [
-        { img: "/menu/beef-delight-550x550px.png", grid: "card-1-1-1" },
-        { img: "/menu/beef-pepperoni-feast-550x550px.png", grid: "card-1-1-1" },
-        { img: "/menu/beef-rasher-550x550px.png", grid: "card-1-1-1" },
-        { img: "/menu/cheesy-sausage-550x550px.png", grid: "card-1-1-1" },
-        { img: "/menu/chicken-delight-550x550px.png", grid: "card-1-1-1" },
+        { img: "/menu/beef-delight.png", grid: "card-1-1-1" },
+        { img: "/menu/beef-pepperoni-feast.png", grid: "card-1-1-1" },
+        { img: "/menu/beef-rasher.png", grid: "card-1-1-1" },
+        { img: "/menu/cheesy-sausage.png", grid: "card-1-1-1" },
+        { img: "/menu/chicken-delight.png", grid: "card-1-1-1" },
         {
-          img: "/menu/chicken-pepperoni-feast-550x550px.png",
+          img: "/menu/chicken-pepperoni-feast.png",
           grid: "card-1-1-1",
         },
-        { img: "/menu/chicken-sausage-550x550px.png", grid: "card-1-1-1" },
-        { img: "/menu/chili-chicken-550x550px.png", grid: "card-1-1-1" },
-        { img: "/menu/margherita-550x550px.png", grid: "card-1-1-1" },
-        { img: "/menu/pituna-delight-550x550pxzza5.png", grid: "card-1-1-1" },
+        { img: "/menu/chicken-sausage.png", grid: "card-1-1-1" },
+        { img: "/menu/chili-chicken.png", grid: "card-1-1-1" },
+        { img: "/menu/margherita.png", grid: "card-1-1-1" },
+        { img: "/menu/tuna-delight.png", grid: "card-1-1-1" },
       ],
     };
   },
