@@ -6,12 +6,9 @@ Vue.use(VueRouter);
 // add component
 import Home from '../views/Home.vue';
 import Menu from '../views/Menu.vue';
-import DetailProduct from '../views/DetailProduct.vue';
 import Order from '../views/Order.vue';
 import Login from '../views/Login.vue';
 import About from '../views/About.vue';
-import Transactions from '../views/Transactions.vue';
-import DetailTransaction from '../views/DetailTransaction.vue';
 
 const routes = [
   {
@@ -30,11 +27,6 @@ const routes = [
     component: Order,
   },
   {
-    path: '/product/:categoryId/:productId',
-    name: 'detailProduct',
-    component: DetailProduct,
-  },
-  {
     path: '/login',
     name: 'login',
     component: Login,
@@ -43,16 +35,6 @@ const routes = [
     path: '/About',
     name: 'About',
     component: About,
-  },
-  {
-    path: '/transactions',
-    name: 'transactions',
-    component: Transactions,
-  },
-  {
-    path: '/transactions/:transactionId',
-    name: 'detailTransaction',
-    component: DetailTransaction,
   },
 ];
 

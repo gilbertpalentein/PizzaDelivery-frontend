@@ -37,7 +37,6 @@
 import axios from "axios";
 
 export default {
-  props: ["currentCustomerId"],
   name: "SignUp",
   data() {
     return {
