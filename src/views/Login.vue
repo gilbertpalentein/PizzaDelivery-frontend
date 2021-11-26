@@ -42,10 +42,8 @@ export default {
   data() {
     return {
       person: {
-        name: "",
         email: "",
         password: "",
-        address: "",
       },
     };
   },
@@ -59,12 +57,7 @@ export default {
   computed: {
     isValid() {
       let obj = this.person;
-      if (
-        obj.name.length == 0 ||
-        obj.address.length == 0 ||
-        obj.email.length == 0 ||
-        obj.password.length == 0
-      ) {
+      if (obj.email.length == 0 || obj.password.length == 0) {
         return true;
       }
 
