@@ -6,7 +6,7 @@
     <div class="column is-four-fifths">
       <div class="card">
         <div class="card-content">
-          <h1 class="title cart-header"><b>Shopping Cart</b></h1>
+          <h1 class="title cart-header"><b>Order Details</b></h1>
           <div></div>
           <div class="content" style="margin-bottom: 0">
             <b-table
@@ -119,7 +119,7 @@
                 to="/menu"
                 type="is-light"
                 style="margin-right: 12px"
-                ><b>Continue Shopping</b></b-button
+                ><b>Add another Pizza</b></b-button
               >
               <b-button
                 @click="isComponentModalActive = true"

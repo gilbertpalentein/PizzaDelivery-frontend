@@ -29,12 +29,6 @@
   </div>
 </template>
 
-
-
-<script>
-
-</script>
-
 <style scoped>
 .bgAbout {
   background-image: url("../assets/about/about_bg.png");
