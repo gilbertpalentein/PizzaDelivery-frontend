@@ -6,9 +6,6 @@
     <div class="column is-four-fifths">
       <div class="card">
         <div class="card-content">
-        
-          <h1 class="title cart-header"><b>Order Details</b></h1>
-
           <h1 class="title cart-header" style="color: red">
             <b>Order Details</b>
           </h1>
