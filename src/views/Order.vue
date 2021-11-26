@@ -6,7 +6,13 @@
     <div class="column is-four-fifths">
       <div class="card">
         <div class="card-content">
+        
           <h1 class="title cart-header"><b>Order Details</b></h1>
+
+          <h1 class="title cart-header" style="color: red">
+            <b>Order Details</b>
+          </h1>
+
           <div></div>
           <div class="content" style="margin-bottom: 0">
             <b-table
@@ -163,6 +169,7 @@
           </section>
           <footer class="modal-card-foot">
             <b-button
+              style="color: white"
               type="is-secondary"
               @click="isComponentModalActive = false"
               >Cancel</b-button
@@ -296,5 +303,9 @@ export default {
 .cart-header {
   border-bottom: 1px solid black;
   padding-bottom: 24px;
+}
+
+button {
+  background-image: linear-gradient(to right, #cc2e5d, #ff5858);
 }
 </style>
