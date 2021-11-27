@@ -1,45 +1,77 @@
 <template>
-  <div class="card" :class="gridClass" :style="gridStyle">
-    <div id="menu">
-      <button class="button" @click="showModal = true">Pizza Name</button>
-      <p class="price">Rp. 20.000</p>
-      <transition name="fade" appear>
-        <div
-          class="modal-overlay"
-          v-if="showModal"
-          @click="showModal = false"
-        ></div>
-      </transition>
-      <transition name="slide" appear>
-        <div id="cek" v-if="showModal">
-          <h1>Lorem Ipsum</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
-            provident explicabo accusamus laudantium voluptatum nobis sed
-            nesciunt neque possimus molestiae?
-          </p>
-          <button class="button" @click="showModal = false">Close</button>
-          <button class="button BuyButton">Buy (harganya)</button>
-        </div>
-      </transition>
+  <!--  <div :class="gridClass" :style="gridStyle" class="card">-->
+  <!--  <div id="menu">-->
+  <!--    <button class="button" @click="showModal = true">Pizza Name</button>-->
+  <!--    <p class="price">Rp. 20.000</p>-->
+  <!--    <transition appear name="fade">-->
+  <!--      <div-->
+  <!--          v-if="showModal"-->
+  <!--          class="modal-overlay"-->
+  <!--          @click="showModal = false"-->
+  <!--      ></div>-->
+  <!--    </transition>-->
+  <!--    <transition appear name="slide">-->
+  <!--      <div v-if="showModal" id="cek">-->
+  <!--        <h1>Lorem Ipsum</h1>-->
+  <!--        <p>-->
+  <!--          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem-->
+  <!--          provident explicabo accusamus laudantium voluptatum nobis sed-->
+  <!--          nesciunt neque possimus molestiae?-->
+  <!--        </p>-->
+  <!--        <button class="button" @click="showModal = false">Close</button>-->
+  <!--        <button class="button BuyButton">Buy (harganya)</button>-->
+  <!--      </div>-->
+  <!--    </transition>-->
+  <!--  </div>-->
+
+  <div id="menu">
+    <button class="button" @click="showModal = true">{{ item.nama }}</button>
+    <img
+        :key="item.gambar"
+        :alt="item.name"
+        :src="imagePath"
+    >
+    <p class="price">{{ item.harga }}</p>
+    <!--    <transition appear name="fade">-->
+    <div
+        v-if="showModal"
+        class="modal-overlay"
+        @click="showModal = false"
+    />
+    <!--    </transition>-->
+    <!--    <transition appear name="slide">-->
+    <div v-if="showModal" id="cek">
+      <h1>{{ item.nama }}</h1>
+      <p>
+        {{ item.deskripsi }}
+      </p>
+      <button class="button" @click="showModal = false">Close</button>
+      <button class="button BuyButton" @click="addToCart">Buy ({{ item.harga }})</button>
     </div>
+    <!--    </transition>-->
   </div>
+  <!--  </div>-->
 </template>
 
 <script>
+import CartService from '../services/CartService'
+
 export default {
-  props: ["item", "index"],
+  props: ['item', 'index'],
   computed: {
+    imagePath() {
+      return `/menu/${ this.item.gambar }`
+    },
     gridStyle() {
       return {
-        "--i": this.index,
-        "background-image": "url(" + require("../assets/" + this.item.img) + ")",
+        '--i': this.index,
+        'background-image': 'url(' + require('../assets/' + this.item.img) + ')',
       };
     },
     gridClass() {
       return {
-        "card-1-1": this.item.grid === "card-1-1",
-        "card-3-1": this.item.grid === "card-3-1",
+        'card-1-1': this.item.grid === 'card-1-1',
+        'card-3-1': this.item.grid === 'card-3-1',
       };
     },
   },
@@ -47,6 +79,7 @@ export default {
   data() {
     return {
       showModal: false,
+      cartService: new CartService()
     };
   },
 
@@ -54,6 +87,12 @@ export default {
     toggleModal() {
       this.showModal = !this.showModal;
     },
+    addToCart() {
+      this.cartService.addToCart({
+        ...this.item,
+        quantity: 1
+      })
+    }
   },
 };
 </script>
@@ -179,3 +218,4 @@ p {
   transform: translateY(-50%) translateX(100vw);
 }
 </style>
+

@@ -1,31 +1,28 @@
 <template>
   <div class="container">
     <div id="app">
-      <transition-group appear name="slide-in" class="grid-wrapper" tag="div">
-        <!-- <Card
-          v-for="pizza in pizzas" :key="pizza"
-        /> -->
-        <!-- <Card
-          v-for="(card, index) in cards"
-          :key="'card' + index"
-          :item="card"
-          :index="index"
-        /> -->
-        <div v-for="pizza in pizzas.data" :key="pizza">
-          <h1>{{ pizza.nama }}</h1>
-          <h1>{{ pizza.deskripsi }}</h1>
-          <h1>{{ pizza.harga }}</h1>
-          <h1>{{ pizza.gambar }}</h1>
-        </div>
-        <!-- <img v-for="pizza in pizzas.data" :key="getImage(pizza.gambar)"  :src="pizza.gambar" :aria-flowto="pizza.gambar"> -->
-      </transition-group>
+      <!--      <transition-group appear class="grid-wrapper" name="slide-in" tag="div">-->
+      <!-- <Card
+        v-for="pizza in pizzas" :key="pizza"
+      /> -->
+      <!-- <Card
+        v-for="(card, index) in cards"
+        :key="'card' + index"
+        :item="card"
+        :index="index"
+      /> -->
+      <div v-for="pizza in pizzas.data" :key="pizza.id">
+        <MenuCard :item="pizza"/>
+      </div>
+      <!--      </transition-group>-->
     </div>
   </div>
 </template>
 
 <script>
+import MenuCard from '@/components/MenuCard';
 //import Card from "../components/MenuCard";
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   mounted() {
@@ -37,20 +34,14 @@ export default {
     };
   },
   components: {
+    MenuCard
     //Card,
   },
   methods: {
     async fetchData() {
-      const res = await axios.get("/user/menu");
+      const res = await axios.get('/user/menu');
       this.pizzas = res.data;
-      this.pizzas.array.forEach(element => {
-        console.log(element);
-      });
-      //console.log(this.pizzas);
     },
-    async getImage(imgName) {
-      return "../assets" + imgName
-    }
   },
 };
 </script>
