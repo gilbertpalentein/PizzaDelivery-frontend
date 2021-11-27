@@ -33,7 +33,7 @@ export default {
     gridStyle() {
       return {
         "--i": this.index,
-        "background-image": "url(" + require("../assets" + this.item.img) + ")",
+        "background-image": "url(" + require("../assets/" + this.item.img) + ")",
       };
     },
     gridClass() {
