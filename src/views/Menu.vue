@@ -2,19 +2,29 @@
   <div class="container">
     <div id="app">
       <transition-group appear name="slide-in" class="grid-wrapper" tag="div">
-        <Card
+        <!-- <Card
+          v-for="pizza in pizzas" :key="pizza"
+        /> -->
+        <!-- <Card
           v-for="(card, index) in cards"
           :key="'card' + index"
           :item="card"
           :index="index"
-        />
+        /> -->
+        <div v-for="pizza in pizzas.data" :key="pizza">
+          <h1>{{ pizza.nama }}</h1>
+          <h1>{{ pizza.deskripsi }}</h1>
+          <h1>{{ pizza.harga }}</h1>
+          <h1>{{ pizza.gambar }}</h1>
+        </div>
+        <!-- <img v-for="pizza in pizzas.data" :key="getImage(pizza.gambar)"  :src="pizza.gambar" :aria-flowto="pizza.gambar"> -->
       </transition-group>
     </div>
   </div>
 </template>
 
 <script>
-import Card from "../components/MenuCard";
+//import Card from "../components/MenuCard";
 import axios from "axios";
 
 export default {
@@ -23,33 +33,24 @@ export default {
   },
   data: () => {
     return {
-      products: [],
-      cards: [
-        { img: "/menu/beef-delight.png", grid: "card-1-1-1" },
-        { img: "/menu/beef-pepperoni-feast.png", grid: "card-1-1-1" },
-        { img: "/menu/beef-rasher.png", grid: "card-1-1-1" },
-        { img: "/menu/cheesy-sausage.png", grid: "card-1-1-1" },
-        { img: "/menu/chicken-delight.png", grid: "card-1-1-1" },
-        {
-          img: "/menu/chicken-pepperoni-feast.png",
-          grid: "card-1-1-1",
-        },
-        { img: "/menu/chicken-sausage.png", grid: "card-1-1-1" },
-        { img: "/menu/chili-chicken.png", grid: "card-1-1-1" },
-        { img: "/menu/margherita.png", grid: "card-1-1-1" },
-        { img: "/menu/tuna-delight.png", grid: "card-1-1-1" },
-      ],
+      pizzas: [],
     };
   },
   components: {
-    Card,
+    //Card,
   },
   methods: {
     async fetchData() {
       const res = await axios.get("/user/menu");
-      this.products = res.data;
-      console.log(this.products);
+      this.pizzas = res.data;
+      this.pizzas.array.forEach(element => {
+        console.log(element);
+      });
+      //console.log(this.pizzas);
     },
+    async getImage(imgName) {
+      return "../assets" + imgName
+    }
   },
 };
 </script>

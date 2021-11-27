@@ -13,7 +13,6 @@
 <script>
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import axios from "axios";
 export default {
   components: {
     Navbar,
@@ -34,18 +33,9 @@ export default {
   },
   data() {
     return {
-      customers: [],
-      currentCustomerId: 1,
     };
   },
   methods: {
-    async fetchCustomer() {
-      const res = await axios.get("/customers");
-      this.customers = res.data;
-    },
-    onSelect(id) {
-      this.currentCustomerId = id;
-    },
   },
 };
 </script>
