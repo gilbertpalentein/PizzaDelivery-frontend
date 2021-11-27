@@ -18,76 +18,76 @@
               :loading="isLoading"
             >
               <b-table-column
-                field="id"
-                label="No"
-                width="40"
-                numeric
-                v-slot="props"
+                  v-slot="props"
+                  field="id"
+                  label="No"
+                  numeric
+                  width="40"
               >
                 {{ props.index + 1 }}
               </b-table-column>
 
-              <b-table-column field="Name" label="Name" v-slot="props">
+              <b-table-column v-slot="props" field="Name" label="Name">
                 {{ props.row.name }}
               </b-table-column>
 
               <b-table-column
-                field="description"
-                label="Description"
-                width="200"
-                v-slot="props"
+                  v-slot="props"
+                  field="description"
+                  label="Description"
+                  width="200"
               >
                 {{ props.row.description }}
               </b-table-column>
 
-              <b-table-column field="image" label="Image" v-slot="props">
+              <b-table-column v-slot="props" field="image" label="Image">
                 <figure style="text-align: center; margin: 0">
                   <img
-                    class="image-product"
-                    :src="require(`@/${props.row.image_url}`)"
-                    width="200px"
+                      :src="require(`@/${props.row.image_url}`)"
+                      class="image-product"
+                      width="200px"
                   />
                 </figure>
               </b-table-column>
 
               <b-table-column
-                field="quantity"
-                label="Quantity"
-                width="125"
-                v-slot="props"
+                  v-slot="props"
+                  field="quantity"
+                  label="Quantity"
+                  width="125"
               >
                 <b-field>
                   <b-numberinput
-                    v-model="props.row.quantity"
-                    min="1"
-                    size="is-small"
-                    controls-position="compact"
+                      v-model="props.row.quantity"
+                      controls-position="compact"
+                      min="1"
+                      size="is-small"
                   >
                   </b-numberinput>
                 </b-field>
               </b-table-column>
 
-              <b-table-column field="price" label="Price" v-slot="props">
-                Rp. {{ parseInt(props.row.price).toLocaleString("id-ID") }}
+              <b-table-column v-slot="props" field="price" label="Price">
+                Rp. {{ parseInt(props.row.price).toLocaleString('id-ID') }}
               </b-table-column>
 
-              <b-table-column field="total" label="Total" v-slot="props"
-                ><span v-if="typeof props.row.quantity !== 'undefined'">
+              <b-table-column v-slot="props" field="total" label="Total"
+              ><span v-if="typeof props.row.quantity !== 'undefined'">
                   Rp.
                   {{
-                    parseInt(
+                  parseInt(
                       props.row.price * props.row.quantity
-                    ).toLocaleString("id-ID")
-                  }}
+                  ).toLocaleString('id-ID')
+                }}
                 </span>
                 <span v-else> - </span>
               </b-table-column>
 
-              <b-table-column field="action" label="Action" v-slot="props">
+              <b-table-column v-slot="props" field="action" label="Action">
                 <b-button
-                  @click="propsDeleteItem(props.row)"
-                  type="is-danger"
-                  icon-right="trash"
+                    icon-right="trash"
+                    type="is-danger"
+                    @click="propsDeleteItem(props.row)"
                 />
               </b-table-column>
 
@@ -118,18 +118,18 @@
           <div class="level">
             <div class="level-right is-flex" style="width: 100%">
               <b-button
-                tag="router-link"
-                to="/menu"
-                type="is-light"
-                style="margin-right: 12px"
-                ><b>Add another Pizza</b></b-button
+                  style="margin-right: 12px"
+                  tag="router-link"
+                  to="/menu"
+                  type="is-light"
+              ><b>Add another Pizza</b></b-button
               >
               <b-button
-                @click="isComponentModalActive = true"
-                type="is-primary"
-                style="width: 180px"
-                :disabled="!checkValidity()"
-                ><b>Pay</b></b-button
+                  :disabled="!checkValidity()"
+                  style="width: 180px"
+                  type="is-primary"
+                  @click="isComponentModalActive = true"
+              ><b>Pay</b></b-button
               >
             </div>
           </div>
@@ -138,10 +138,10 @@
     </div>
 
     <b-modal
-      v-model="isComponentModalActive"
-      has-modal-card
-      trap-focus
-      :destroy-on-hide="false"
+        v-model="isComponentModalActive"
+        :destroy-on-hide="false"
+        has-modal-card
+        trap-focus
     >
       <form action="">
         <div class="modal-card" style="width: 500px">
@@ -150,14 +150,14 @@
           </header>
           <section class="modal-card-body">
             <b-field label="Total">
-              <b-input name="form.total" :value="getTotalBill" disabled>
+              <b-input :value="getTotalBill" disabled name="form.total">
               </b-input>
             </b-field>
             <b-field label="Pay Method">
               <b-select
-                v-model="form.method"
-                placeholder="Select a pay method"
-                expanded
+                  v-model="form.method"
+                  expanded
+                  placeholder="Select a pay method"
               >
                 <option value="Cash">Cash</option>
                 <option value="Transfer">Transfer</option>
@@ -172,10 +172,11 @@
               >Cancel</b-button
             >
             <b-button
-              type="is-primary"
-              :disabled="form.method == ''"
-              @click="postTransaction()"
-              >Continue to Pay</b-button
+                :disabled="form.method == ''"
+                type="is-primary"
+                @click="postTransaction()"
+            >Continue to Pay
+            </b-button
             >
           </footer>
         </div>
@@ -185,18 +186,21 @@
 </template>
 
 <script>
-import axios from "axios";
-import moment from "moment";
+import CartService from '@/services/CartService';
+import axios from 'axios';
+import moment from 'moment';
 
 export default {
-  props: ["currentCustomerId"],
+  props: ['currentCustomerId'],
   data() {
     const data = [];
     return {
       form: {
-        method: "",
+        method: '',
         total: 1000000,
       },
+
+      cartService: new CartService(),
 
       // model for table
       quantities: [],
@@ -243,6 +247,7 @@ export default {
     },
     async fetchData() {
       try {
+        console.log(this.cartService.getCurrentCart())
         const res = await axios.get("/carts/" + this.currentCustomerId);
         this.data = res.data;
       } catch (error) {
@@ -268,6 +273,14 @@ export default {
       await this.fetchData();
     },
     async postTransaction() {
+      const orders = this.cartService.getCurrentCart()
+          .map(({ id, quantity }) => ({
+                pizza_id: id,
+                quantity
+              })
+          )
+        console.log(orders)
+
       var products = [];
       this.data.forEach(function (item) {
         var product = {
