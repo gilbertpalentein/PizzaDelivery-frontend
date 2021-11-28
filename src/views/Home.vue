@@ -62,7 +62,6 @@ export default {
   position: relative;
   padding: 10px;
   width: 100%;
-  min-height: 100vh;
 }
 .grid-wrapper {
   display: grid;
