@@ -1,32 +1,23 @@
 <template>
   <div class="container">
     <div id="app">
-      <!--      <transition-group appear class="grid-wrapper" name="slide-in" tag="div">-->
-      <!-- <Card
-        v-for="pizza in pizzas" :key="pizza"
-      /> -->
-      <!-- <Card
-        v-for="(card, index) in cards"
-        :key="'card' + index"
-        :item="card"
-        :index="index"
-      /> -->
-      <div v-for="pizza in pizzas.data" :key="pizza.id">
-        <MenuCard :item="pizza"/>
-      </div>
-      <!--      </transition-group>-->
+      <transition-group appear class="grid-wrapper" name="slide-in" tag="div">
+        <div v-for="pizza in pizzas.data" :key="pizza.id">
+          <MenuCard :item="pizza" />
+        </div>
+      </transition-group>
     </div>
   </div>
 </template>
 
 <script>
-import MenuCard from '@/components/MenuCard';
+import MenuCard from "@/components/MenuCard";
 //import Card from "../components/MenuCard";
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   mounted() {
-    this.fetchData()
+    this.fetchData();
   },
   data: () => {
     return {
@@ -34,12 +25,12 @@ export default {
     };
   },
   components: {
-    MenuCard
+    MenuCard,
     //Card,
   },
   methods: {
     async fetchData() {
-      const res = await axios.get('/user/menu');
+      const res = await axios.get("/user/menu");
       this.pizzas = res.data;
     },
   },
@@ -82,7 +73,6 @@ export default {
   position: relative;
   padding: 50px;
   width: 100%;
-  min-height: 100vh;
 }
 
 .grid-wrapper {

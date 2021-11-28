@@ -1,85 +1,48 @@
 <template>
-  <!--  <div :class="gridClass" :style="gridStyle" class="card">-->
-  <!--  <div id="menu">-->
-  <!--    <button class="button" @click="showModal = true">Pizza Name</button>-->
-  <!--    <p class="price">Rp. 20.000</p>-->
-  <!--    <transition appear name="fade">-->
-  <!--      <div-->
-  <!--          v-if="showModal"-->
-  <!--          class="modal-overlay"-->
-  <!--          @click="showModal = false"-->
-  <!--      ></div>-->
-  <!--    </transition>-->
-  <!--    <transition appear name="slide">-->
-  <!--      <div v-if="showModal" id="cek">-->
-  <!--        <h1>Lorem Ipsum</h1>-->
-  <!--        <p>-->
-  <!--          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem-->
-  <!--          provident explicabo accusamus laudantium voluptatum nobis sed-->
-  <!--          nesciunt neque possimus molestiae?-->
-  <!--        </p>-->
-  <!--        <button class="button" @click="showModal = false">Close</button>-->
-  <!--        <button class="button BuyButton">Buy (harganya)</button>-->
-  <!--      </div>-->
-  <!--    </transition>-->
-  <!--  </div>-->
-
-  <div id="menu">
-    <button class="button" @click="showModal = true">{{ item.nama }}</button>
-    <img
-        :key="item.gambar"
-        :alt="item.name"
-        :src="imagePath"
-    >
-    <p class="price">{{ item.harga }}</p>
-    <!--    <transition appear name="fade">-->
-    <div
-        v-if="showModal"
-        class="modal-overlay"
-        @click="showModal = false"
-    />
-    <!--    </transition>-->
-    <!--    <transition appear name="slide">-->
-    <div v-if="showModal" id="cek">
-      <h1>{{ item.nama }}</h1>
-      <p>
-        {{ item.deskripsi }}
-      </p>
-      <button class="button" @click="showModal = false">Close</button>
-      <button class="button BuyButton" @click="addToCart">Buy ({{ item.harga }})</button>
+  <div class="card">
+    <div id="menu">
+      <button class="button" @click="showModal = true">{{ item.nama }}</button>
+      <center>
+        <img :key="item.gambar" :alt="item.name" :src="imagePath" /><br />
+        <p class="price">Rp.{{ item.harga }}</p>
+      </center>
+      <transition appear name="fade">
+        <div
+          v-if="showModal"
+          class="modal-overlay"
+          @click="showModal = false"
+        />
+      </transition>
+      <transition appear name="slide">
+        <div v-if="showModal" id="cek">
+          <h1>{{ item.nama }}</h1>
+          <p>
+            {{ item.deskripsi }}
+          </p>
+          <button class="button" @click="showModal = false">Close</button>
+          <button class="button BuyButton" @click="addToCart">
+            Buy (Rp.{{ item.harga }})
+          </button>
+        </div>
+      </transition>
     </div>
-    <!--    </transition>-->
   </div>
-  <!--  </div>-->
 </template>
 
 <script>
-import CartService from '../services/CartService'
+import CartService from "../services/CartService";
 
 export default {
-  props: ['item', 'index'],
+  props: ["item", "index"],
   computed: {
     imagePath() {
-      return `/menu/${ this.item.gambar }`
-    },
-    gridStyle() {
-      return {
-        '--i': this.index,
-        'background-image': 'url(' + require('../assets/' + this.item.img) + ')',
-      };
-    },
-    gridClass() {
-      return {
-        'card-1-1': this.item.grid === 'card-1-1',
-        'card-3-1': this.item.grid === 'card-3-1',
-      };
+      return `images/menu/${this.item.gambar}`;
     },
   },
-
   data() {
     return {
       showModal: false,
-      cartService: new CartService()
+      cartService: new CartService(),
     };
   },
 
@@ -90,9 +53,9 @@ export default {
     addToCart() {
       this.cartService.addToCart({
         ...this.item,
-        quantity: 1
-      })
-    }
+        quantity: 1,
+      });
+    },
   },
 };
 </script>
@@ -100,17 +63,7 @@ export default {
 <style lang="scss" scoped>
 .card {
   width: 100%;
-  height: 280px;
-  background-position: center;
-  background-size: cover;
-}
-
-.card-1-1 {
-  grid-column: span 1;
-}
-
-.card-3-1 {
-  grid-column: span 3;
+  height: 100%;
 }
 
 .button {
@@ -139,8 +92,6 @@ export default {
 
 .price {
   display: inline-block;
-  margin-top: 61%;
-  margin-left: 40%;
   border-radius: 5px;
 
   background-color: white;
@@ -216,6 +167,11 @@ p {
 .slide-enter,
 .slide-leave-to {
   transform: translateY(-50%) translateX(100vw);
+}
+img {
+  width: 70%;
+  margin-top: -8%;
+  margin-bottom: -10%;
 }
 </style>
 
