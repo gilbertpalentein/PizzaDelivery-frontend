@@ -47,21 +47,14 @@ export default {
     };
   },
   methods: {
-    async postCustomer() {
-      console.log(this.person);
-      await axios.post("/customers", this.person);
-      this.$router.push({ name: "home" });
+    // login method
+    login(){
+      const res = axios.post("/login");
+      console.log(res);
     },
-  },
-  computed: {
-    isValid() {
-      let obj = this.person;
-      if (obj.email.length == 0 || obj.password.length == 0) {
-        return true;
-      }
-
-      return false;
-    },
+    isValid(){
+      return true
+    }
   },
 };
 </script>

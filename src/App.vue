@@ -1,11 +1,7 @@
 <template>
   <div class="app">
-    <Navbar
-      v-bind:customers="customers"
-      :currentCustomerId="currentCustomerId"
-      v-on:change-user="onSelect"
-    />
-    <router-view v-bind:currentCustomerId="currentCustomerId" />
+    <Navbar/>
+    <router-view />
     <Footer />
   </div>
 </template>
@@ -18,23 +14,6 @@ export default {
     Navbar,
     Footer,
   },
-  mounted() {
-    this.fetchCustomer();
-  },
-  created() {
-    if (localStorage.currentCustomerId) {
-      this.currentCustomerId = localStorage.currentCustomerId;
-    }
-  },
-  watch: {
-    currentCustomerId(currentCustomerId) {
-      localStorage.setItem("currentCustomerId", currentCustomerId);
-    },
-  },
-  data() {
-    return {};
-  },
-  methods: {},
 };
 </script>
 

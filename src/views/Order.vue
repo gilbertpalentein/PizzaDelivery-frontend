@@ -6,16 +6,15 @@
     <div class="column is-four-fifths">
       <div class="card">
         <div class="card-content">
+
           <h1 class="title cart-header" style="color: red">
             <b>Order Details</b>
           </h1>
-
-          <div></div>
+          
           <div class="content" style="margin-bottom: 0">
             <b-table
               :data="data ? data : []"
               :hoverable="true"
-              :loading="isLoading"
             >
               <b-table-column
                   v-slot="props"
@@ -68,17 +67,12 @@
               </b-table-column>
 
               <b-table-column v-slot="props" field="price" label="Price">
-                Rp. {{ parseInt(props.row.price).toLocaleString('id-ID') }}
+                Rp. {{ parseInt(props.row.price)}}
               </b-table-column>
 
               <b-table-column v-slot="props" field="total" label="Total"
               ><span v-if="typeof props.row.quantity !== 'undefined'">
-                  Rp.
-                  {{
-                  parseInt(
-                      props.row.price * props.row.quantity
-                  ).toLocaleString('id-ID')
-                }}
+                  Rp. {{parseInt(props.row.price * props.row.quantity)}}
                 </span>
                 <span v-else> - </span>
               </b-table-column>
@@ -188,10 +182,8 @@
 <script>
 import CartService from '@/services/CartService';
 import axios from 'axios';
-import moment from 'moment';
 
 export default {
-  props: ['currentCustomerId'],
   data() {
     const data = [];
     return {
@@ -207,14 +199,9 @@ export default {
 
       // Table
       data,
-      isLoading: false,
 
       // modal
       isComponentModalActive: false,
-
-      // customers
-      customers: [],
-      user: "",
     };
   },
   mounted() {
@@ -222,7 +209,7 @@ export default {
   },
   computed: {
     getTotalBill: function () {
-      return "Rp " + parseInt(this.calculateTotal()).toLocaleString("id-ID");
+      return "Rp " + parseInt(this.calculateTotal());
     },
   },
   methods: {
@@ -246,60 +233,20 @@ export default {
       return isValid;
     },
     async fetchData() {
-      try {
-        console.log(this.cartService.getCurrentCart())
-        const res = await axios.get("/carts/" + this.currentCustomerId);
-        this.data = res.data;
-      } catch (error) {
-        this.data = [];
-      }
-    },
-    propsDeleteItem(item) {
-      this.$buefy.dialog.confirm({
-        title: "Delete this item from cart?",
-        message:
-          "Item that has been <b>deleted</b> will not be count as your item again!",
-        type: "is-danger",
-        hasIcon: true,
-        icon: "times-circle",
-        iconPack: "fa",
-        cancelText: "No",
-        confirmText: "Yes",
-        onConfirm: () => this.deleteFromCart(item),
-      });
-    },
-    async deleteFromCart(item) {
-      await axios.delete("/carts/" + this.currentCustomerId + "/" + item.id);
-      await this.fetchData();
+      console.log(this.cartService.getCurrentCart())
+      // masukin cart
     },
     async postTransaction() {
       const orders = this.cartService.getCurrentCart()
-          .map(({ id, quantity }) => ({
-                pizza_id: id,
-                quantity
-              })
-          )
-        console.log(orders)
-
-      var products = [];
-      this.data.forEach(function (item) {
-        var product = {
-          product_id: item.id,
-          qty: item.quantity,
-        };
-        products.push(product);
-      });
-      var transaction = {
-        customer_id: parseInt(this.currentCustomerId),
-        date: moment(Date.now()).format("YYYY-MM-DDTHH:mm:ssZ"),
-        products: products,
-      };
-      await axios.post("/transactions", transaction);
+        .map(({ id, quantity }) => ({
+              pizza_id: id,
+              quantity
+            })
+        )
+      console.log(orders)
+      await axios.post("/transactions", orders);
       alert("Payment Successful!");
       this.isComponentModalActive = false;
-    },
-    onSelect(value) {
-      this.user = value;
     },
   },
 };
