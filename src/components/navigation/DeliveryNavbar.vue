@@ -14,12 +14,17 @@
       <b-navbar-item href="#">
         <b-icon
           pack="fas"
-          icon="shopping-cart"
+          icon="shipping-fast"
           size="is-small"
           type="is-primary"
         >
         </b-icon>
         <span style="margin-left: 0.5rem">Deliver Orders</span>
+      </b-navbar-item>
+      <b-navbar-item href="#">
+        <b-icon pack="fas" icon="user" size="is-small" type="is-primary">
+        </b-icon>
+        <span style="margin-left: 0.5rem">Logout</span>
       </b-navbar-item>
     </template>
   </b-navbar>
