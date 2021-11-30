@@ -1,29 +1,29 @@
 <template>
   <div class="app">
-    <Navbar/>
+    <Navbar />
     <router-view />
     <Footer />
   </div>
 </template>
 
 <script>
-var userType = 'customer';
-var path = ''
-switch (userType){
-  case 'owner':
-    path = "./components/navigation/OwnerNavbar"
+var userType = "customer";
+var path = "";
+switch (userType) {
+  case "owner":
+    path = "./components/navigation/OwnerNavbar";
     break;
-  case 'staff':
-    path = "./components/navigation/StaffNavbar"
+  case "staff":
+    path = "./components/navigation/StaffNavbar";
     break;
-  case 'chef':
-    path = "./components/navigation/ChefNavbar"
+  case "chef":
+    path = "./components/navigation/ChefNavbar";
     break;
-  case 'delivery':
-    path = "./components/navigation/DeliveryNavbar.vue"
+  case "delivery":
+    path = "./components/navigation/DeliveryNavbar.vue";
     break;
   default:
-    path = "./components/navigation/CustNavbar"
+    path = "./components/navigation/CustNavbar";
 }
 console.log(path);
 
