@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <Navbar />
     <div v-if="userType == 'customer'"> 
       <Navbar/>
     </div>

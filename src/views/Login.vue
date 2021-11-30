@@ -48,13 +48,13 @@ export default {
   },
   methods: {
     // login method
-    login(){
+    login() {
       const res = axios.post("/login");
       console.log(res);
     },
-    isValid(){
-      return true
-    }
+    isValid() {
+      return true;
+    },
   },
 };
 </script>

@@ -12,12 +12,7 @@
         <span style="margin-left: 0.5rem">Home</span>
       </b-navbar-item>
       <b-navbar-item href="/menu">
-        <b-icon
-          pack="fas"
-          icon="pizza-slice"
-          size="is-small"
-          type="is-primary"
-        >
+        <b-icon pack="fas" icon="pizza-slice" size="is-small" type="is-primary">
         </b-icon>
         <span style="margin-left: 0.5rem">Menu</span>
       </b-navbar-item>
@@ -35,6 +30,11 @@
         <b-icon pack="fas" icon="store" size="is-small" type="is-primary">
         </b-icon>
         <span style="margin-left: 0.5rem">About Us</span>
+      </b-navbar-item>
+      <b-navbar-item href="/tracking">
+        <b-icon pack="fas" icon="car" size="is-small" type="is-primary">
+        </b-icon>
+        <span style="margin-left: 0.5rem">Tracking</span>
       </b-navbar-item>
       <b-navbar-item href="/login">
         <b-icon pack="fas" icon="user" size="is-small" type="is-primary">

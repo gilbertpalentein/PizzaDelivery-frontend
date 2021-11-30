@@ -9,6 +9,7 @@ import Menu from '../views/Menu.vue';
 import Order from '../views/Order.vue';
 import Login from '../views/Login.vue';
 import About from '../views/About.vue';
+import Tracking from '../views/Tracking.vue';
 
 const routes = [
   {
@@ -35,6 +36,11 @@ const routes = [
     path: '/About',
     name: 'About',
     component: About,
+  },
+   {
+    path: '/tracking',
+    name: 'Tracking',
+    component: Tracking,
   },
 ];
 
