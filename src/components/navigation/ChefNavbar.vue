@@ -14,12 +14,17 @@
       <b-navbar-item href="#">
         <b-icon
           pack="fas"
-          icon="shopping-cart"
+          icon="pizza-slice"
           size="is-small"
           type="is-primary"
         >
         </b-icon>
-        <span style="margin-left: 0.5rem">Process Orders</span>
+        <span style="margin-left: 0.5rem">Cook</span>
+      </b-navbar-item>
+      <b-navbar-item href="#">
+        <b-icon pack="fas" icon="user" size="is-small" type="is-primary">
+        </b-icon>
+        <span style="margin-left: 0.5rem">Logout</span>
       </b-navbar-item>
     </template>
   </b-navbar>

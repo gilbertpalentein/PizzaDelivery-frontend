@@ -14,12 +14,37 @@
       <b-navbar-item href="#">
         <b-icon
           pack="fas"
-          icon="shopping-cart"
+          icon="book-open"
           size="is-small"
           type="is-primary"
         >
         </b-icon>
-        <span style="margin-left: 0.5rem">Process Orders</span>
+        <span style="margin-left: 0.5rem">View Transaction Log</span>
+      </b-navbar-item>
+      <b-navbar-item href="#">
+        <b-icon
+          pack="fas"
+          icon="money-bill-alt"
+          size="is-small"
+          type="is-primary"
+        >
+        </b-icon>
+        <span style="margin-left: 0.5rem">View Income</span>
+      </b-navbar-item>
+      <b-navbar-item href="#">
+        <b-icon
+          pack="fas"
+          icon="concierge-bell"
+          size="is-small"
+          type="is-primary"
+        >
+        </b-icon>
+        <span style="margin-left: 0.5rem">View Product Sold</span>
+      </b-navbar-item>
+      <b-navbar-item href="#">
+        <b-icon pack="fas" icon="user" size="is-small" type="is-primary">
+        </b-icon>
+        <span style="margin-left: 0.5rem">Logout</span>
       </b-navbar-item>
     </template>
   </b-navbar>
