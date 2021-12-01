@@ -10,6 +10,8 @@ import Order from '../views/Order.vue';
 import Login from '../views/Login.vue';
 import About from '../views/About.vue';
 import Tracking from '../views/Tracking.vue';
+// Staff
+import StaffProcess from '../views/staff/ProcessOrders.vue';
 
 const routes = [
   {
@@ -41,6 +43,11 @@ const routes = [
     path: '/tracking',
     name: 'Tracking',
     component: Tracking,
+  },
+  {
+    path: '/staff/process',
+    name: 'StaffProcess',
+    component: StaffProcess
   },
 ];
 
