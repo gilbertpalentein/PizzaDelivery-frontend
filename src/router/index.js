@@ -12,6 +12,11 @@ import About from '../views/About.vue';
 import Tracking from '../views/Tracking.vue';
 // Staff
 import StaffProcess from '../views/staff/ProcessOrders.vue';
+// Owner
+import TransactionLog from '../views/owner/TransactionLog.vue';
+import Income from '../views/owner/Income.vue';
+import ProductSold from '../views/owner/ProductSold.vue';
+
 
 const routes = [
   {
@@ -48,6 +53,21 @@ const routes = [
     path: '/staff/process',
     name: 'StaffProcess',
     component: StaffProcess
+  },
+  {
+    path: '/owner/log',
+    name: 'ownerLog',
+    component: TransactionLog
+  },
+  {
+    path: '/owner/income',
+    name: 'ownerIncome',
+    component: Income
+  },
+  {
+    path: '/owner/product',
+    name: 'ownerProduct',
+    component: ProductSold
   },
 ];
 
