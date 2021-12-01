@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <Navbar />
     <div v-if="userType == 'customer'"> 
       <Navbar/>
     </div>
@@ -48,8 +47,8 @@ export default {
   },
   methods: {
     async fetchData() {
-       this.userType = 'customer'
-      // this.userType = 'owner'
+      // this.userType = 'customer'
+       this.userType = 'owner'
       // this.userType = 'staff'
       // this.userType = 'chef'
       // this.userType = 'delivery'

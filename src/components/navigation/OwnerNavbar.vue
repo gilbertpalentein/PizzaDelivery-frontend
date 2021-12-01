@@ -11,7 +11,7 @@
         </b-icon>
         <span style="margin-left: 0.5rem">Home</span>
       </b-navbar-item>
-      <b-navbar-item href="#">
+      <b-navbar-item href="/owner/log">
         <b-icon
           pack="fas"
           icon="book-open"
@@ -21,7 +21,7 @@
         </b-icon>
         <span style="margin-left: 0.5rem">View Transaction Log</span>
       </b-navbar-item>
-      <b-navbar-item href="#">
+      <b-navbar-item href="/owner/income">
         <b-icon
           pack="fas"
           icon="money-bill-alt"
@@ -31,7 +31,7 @@
         </b-icon>
         <span style="margin-left: 0.5rem">View Income</span>
       </b-navbar-item>
-      <b-navbar-item href="#">
+      <b-navbar-item href="/owner/product">
         <b-icon
           pack="fas"
           icon="concierge-bell"
