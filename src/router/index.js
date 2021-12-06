@@ -16,6 +16,10 @@ import StaffProcess from '../views/staff/ProcessOrders.vue';
 import TransactionLog from '../views/owner/TransactionLog.vue';
 import Income from '../views/owner/Income.vue';
 import ProductSold from '../views/owner/ProductSold.vue';
+// Chef
+import Cook from '../views/chef/Cook.vue';
+// Delivery Guy
+import Delivery from '../views/delivguy/DeliveryOrder.vue';
 
 
 const routes = [
@@ -68,6 +72,16 @@ const routes = [
     path: '/owner/product',
     name: 'ownerProduct',
     component: ProductSold
+  },
+  {
+    path: '/chef/cook',
+    name: 'Cook',
+    component: Cook
+  },
+  {
+    path: '/delivguy/delivery',
+    name: 'Delivery',
+    component: Delivery
   },
 ];
 

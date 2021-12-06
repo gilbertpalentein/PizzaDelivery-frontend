@@ -11,13 +11,8 @@
         </b-icon>
         <span style="margin-left: 0.5rem">Home</span>
       </b-navbar-item>
-      <b-navbar-item href="#">
-        <b-icon
-          pack="fas"
-          icon="pizza-slice"
-          size="is-small"
-          type="is-primary"
-        >
+      <b-navbar-item href="/chef/cook">
+        <b-icon pack="fas" icon="pizza-slice" size="is-small" type="is-primary">
         </b-icon>
         <span style="margin-left: 0.5rem">Cook</span>
       </b-navbar-item>

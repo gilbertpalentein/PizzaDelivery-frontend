@@ -11,7 +11,7 @@
         </b-icon>
         <span style="margin-left: 0.5rem">Home</span>
       </b-navbar-item>
-      <b-navbar-item href="#">
+      <b-navbar-item href="/delivguy/delivery">
         <b-icon
           pack="fas"
           icon="shipping-fast"
