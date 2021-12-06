@@ -1,19 +1,19 @@
 <template>
   <div class="app">
-    <div v-if="userType == 'customer'"> 
-      <Navbar/>
+    <div v-if="userType == 'customer'">
+      <Navbar />
     </div>
-    <div v-else-if="userType == 'owner'"> 
-      <OwnerNavbar/>
+    <div v-else-if="userType == 'owner'">
+      <OwnerNavbar />
     </div>
-    <div v-else-if="userType == 'staff'"> 
-      <StaffNavbar/>
+    <div v-else-if="userType == 'staff'">
+      <StaffNavbar />
     </div>
-    <div v-else-if="userType == 'chef'"> 
-      <ChefNavbar/>
+    <div v-else-if="userType == 'chef'">
+      <ChefNavbar />
     </div>
-    <div v-else-if="userType == 'delivery'"> 
-      <DeliveryNavbar/>
+    <div v-else-if="userType == 'delivery'">
+      <DeliveryNavbar />
     </div>
     <router-view />
     <Footer />
@@ -34,7 +34,7 @@ export default {
   },
   data: () => {
     return {
-      userType: '',
+      userType: "",
     };
   },
   components: {
@@ -54,8 +54,8 @@ export default {
       // this.userType = 'delivery'
     },
     async getUserType() {
-      return this.userType
-    }
+      return this.userType;
+    },
   },
 };
 </script>
