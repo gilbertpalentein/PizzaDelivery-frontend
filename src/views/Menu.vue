@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     async fetchData() {
-      const res = await axios.get("/user/menu");
+      const res = await axios.get("/menu");
       this.pizzas = res.data;
     },
   },

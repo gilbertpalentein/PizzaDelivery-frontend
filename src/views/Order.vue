@@ -27,7 +27,7 @@
               </b-table-column>
 
               <b-table-column v-slot="props" field="Name" label="Name">
-                {{ props.row.name }}
+                {{ props.row.nama }}
               </b-table-column>
 
               <b-table-column
@@ -36,13 +36,13 @@
                   label="Description"
                   width="200"
               >
-                {{ props.row.description }}
+                {{ props.row.deskripsi }}
               </b-table-column>
 
               <b-table-column v-slot="props" field="image" label="Image">
                 <figure style="text-align: center; margin: 0">
                   <img
-                      :src="require(`@/${props.row.image_url}`)"
+                      :src="`images/menu/${props.row.gambar}`"
                       class="image-product"
                       width="200px"
                   />
@@ -67,12 +67,12 @@
               </b-table-column>
 
               <b-table-column v-slot="props" field="price" label="Price">
-                Rp. {{ parseInt(props.row.price)}}
+                Rp. {{ parseInt(props.row.harga)}}
               </b-table-column>
 
               <b-table-column v-slot="props" field="total" label="Total"
-              ><span v-if="typeof props.row.quantity !== 'undefined'">
-                  Rp. {{parseInt(props.row.price * props.row.quantity)}}
+              ><span v-if="typeof props.row.harga !== 'undefined'">
+                  Rp. {{ parseInt(props.row.harga * props.row.quantity) }}
                 </span>
                 <span v-else> - </span>
               </b-table-column>
@@ -102,7 +102,7 @@
             <p>
               <strong
                 >Rp
-                {{ parseInt(calculateTotal()).toLocaleString("id-ID") }}</strong
+                {{ parseInt(calculateTotal()) }}</strong
               >
             </p>
           </div>
@@ -140,22 +140,22 @@
       <form action="">
         <div class="modal-card" style="width: 500px">
           <header class="modal-card-head">
-            <p class="modal-card-title">Pay the Bill</p>
+            <p class="modal-card-title">Details</p>
           </header>
           <section class="modal-card-body">
             <b-field label="Total">
               <b-input :value="getTotalBill" disabled name="form.total">
               </b-input>
             </b-field>
-            <b-field label="Pay Method">
-              <b-select
-                  v-model="form.method"
-                  expanded
-                  placeholder="Select a pay method"
-              >
-                <option value="Cash">Cash</option>
-                <option value="Transfer">Transfer</option>
-              </b-select>
+            <b-field label="email">
+              <b-input type="email" maxlength="30">
+            </b-input>
+            </b-field>
+            <b-field label="nama">
+              <b-input v-model="nama"></b-input>
+            </b-field>
+            <b-field label="alamat">
+              <b-input v-model="nama"></b-input>
             </b-field>
           </section>
           <footer class="modal-card-foot">
@@ -217,7 +217,7 @@ export default {
       var total = 0;
       this.data.forEach(function (item) {
         if (typeof item.quantity !== "undefined") {
-          total += item.quantity * item.price;
+          total += item.quantity * item.harga;
         }
       });
       return total;
@@ -233,8 +233,21 @@ export default {
       return isValid;
     },
     async fetchData() {
-      console.log(this.cartService.getCurrentCart())
-      // masukin cart
+      this.data = this.cartService.getCurrentCart()
+    },
+    propsDeleteItem(item) {
+      this.$buefy.dialog.confirm({
+        title: "Delete this item from cart?",
+        message:
+          "Item that has been <b>deleted</b> will not be count as your item again!",
+        type: "is-danger",
+        hasIcon: true,
+        icon: "times-circle",
+        iconPack: "fa",
+        cancelText: "No",
+        confirmText: "Yes",
+        onConfirm: () => item.quantity = 0,
+      });
     },
     async postTransaction() {
       const orders = this.cartService.getCurrentCart()
