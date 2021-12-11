@@ -1,44 +1,66 @@
 <template>
-    <div class="table">
-        <b-table
-            :data="data" 
-            :columns="columns" 
-            :hoverable="true"
-            :striped="true"
-        >
-        </b-table>
+  <div class="background">
+    <div class="container">
+      <div class="box">
+        <div class="is-column6" style="padding: 2rem">
+          <h1 class="title" style="text-align: center">Pizza Sold</h1>
+          <b-field label="Period">
+            <b-input v-model="period">{{ period }}</b-input>
+          </b-field>
+          
+          <center>
+            <b-button
+              type="is-danger"
+              class="is-success button"
+              v-on:click="fetchData"
+              >View Pizza Sold</b-button
+            >
+          </center>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                data: [
-                    { 'id': 1, 'name': 'Beef Delight', 'amount': '52'},
-                    { 'id': 2, 'name': 'Beef Pepperoni Feast', 'amount': '72'},
-                    { 'id': 3, 'name': 'Beef Rasher', 'amount': '16'},
-                    { 'id': 4, 'name': 'Cheesy Sausage', 'amount': '72'},
-                    { 'id': 5, 'name': 'Chicken Delight', 'amount': '16'},
-                ],
-                columns: [
-                    {
-                        field: 'id',
-                        label: 'ID',
-                        width: '40',
-                        numeric: true
-                    },
-                    {
-                        field: 'name',
-                        label: 'Name',
-                    },
-                    {
-                        field: 'amount',
-                        label: 'Amount',
-                        centered: true
-                    },
-                ]
-            }
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      period: 1,
+      data: [],
+    };
+  },
+  methods: {
+    async fetchData() {
+      const res = await axios.get("/admin/pizza-sold-period", {
+        params: {
+          period: this.period
         }
-    }
+      });
+      this.data = res.data;
+      this.$buefy.dialog.alert(this.data.message + '<br> Total pizza sold : ' + this.data.total)
+    },
+  },
+};
 </script>
+
+<style>
+.container {
+  width: 450px;
+  height: 320px;
+  margin: 10% auto;
+  background-color: rgba(250, 250, 250, 0.295);
+}
+.background {
+  background-image: url("../../assets/about/about_bg.png");
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-size: cover;
+}
+.box {
+  margin: 5%;
+  margin-top: 10px;
+}
+</style>
