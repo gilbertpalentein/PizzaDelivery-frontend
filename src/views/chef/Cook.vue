@@ -9,11 +9,11 @@
           <th>Date</th>
           <th>Action</th>
         </tr>
-        <tr v-for="pizza in data" :key="pizza.id">
-          <td>{{ pizza.id }}</td>
-          <td>{{ pizza.pizza_order }}</td>
-          <td>{{ pizza.quantity }}</td>
-          <td>{{ pizza.date }}</td>
+        <tr v-for="order in orders.detailOrder" :key="order.id">
+          <td>{{ order.id }}</td>
+          <td>{{ order.pizza_id }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.date }}</td>
           <td>
             <button
               class="button is-small is-light"
@@ -45,43 +45,25 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+  mounted() {
+    this.fetchData();
+  },
   props: ["order"],
   data() {
     return {
-      data: [
-        {
-          id: 1,
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-        },
-        {
-          id: 1,
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-        },
-        {
-          id: 1,
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-        },
-        {
-          id: 1,
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-        },
-        {
-          id: 1,
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-        },
-      ],
+      orderInfo: [],
+      orders: [],
     };
+  },
+  methods: {
+    async fetchData() {
+      const res = await axios.get("/order/active-orders");
+      this.orders = res.data;
+      console.log(this.orders);
+    },
   },
 };
 </script>

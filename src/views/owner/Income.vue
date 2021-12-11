@@ -4,37 +4,15 @@
       <div class="box">
         <div class="is-column6" style="padding: 2rem">
           <h1 class="title" style="text-align: center">Income</h1>
-          <b-field label="Start Date">
-            <b-datepicker
-                v-model="date.start"
-                :show-week-number="showWeekNumber"
-                :locale="locale"
-                placeholder="Click to select..."
-                icon="calendar-today"
-                :icon-right="selected ? 'close-circle' : ''"
-                icon-right-clickable
-                @icon-right-click="clearDate"
-                trap-focus>
-            </b-datepicker>
-          </b-field>
-          <b-field label="End Date">
-            <b-datepicker
-                v-model="date.end"
-                :show-week-number="showWeekNumber"
-                :locale="locale"
-                placeholder="Click to select..."
-                icon="calendar-today"
-                :icon-right="selected ? 'close-circle' : ''"
-                icon-right-clickable
-                @icon-right-click="clearDate"
-                trap-focus>
-            </b-datepicker>
+          <b-field label="Period">
+            <b-input v-model="period">{{ period }}</b-input>
           </b-field>
           
           <center>
             <b-button
               type="is-danger"
               class="is-success button"
+              v-on:click="fetchData"
               >View Income</b-button
             >
           </center>
@@ -45,19 +23,25 @@
 </template>
 
 <script>
+import axios from "axios";
 
 export default {
-  name: "SignUp",
   data() {
     return {
-      date: {
-        start: "",
-        end: ""
-      },
+      period: 1,
+      data: [],
     };
   },
   methods: {
-
+    async fetchData() {
+      const res = await axios.get("/admin/payments-period", {
+        params: {
+          period: this.period
+        }
+      });
+      this.data = res.data;
+      this.$buefy.dialog.alert(this.data.message + '<br> Total income : ' + this.data.total)
+    },
   },
 };
 </script>
