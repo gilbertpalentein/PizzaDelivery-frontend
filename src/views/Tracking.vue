@@ -1,28 +1,19 @@
 <template>
-  <div class="bgTrack">
+  <div class="bgTrack" id="App">
     <div class="container">
       <br />
       <div class="box1">
         <div class="is-column6" style="padding: 2rem">
-          <h1 class="title" style="text-align: center">Track Your Pizza</h1>
+          <h1 class="title" style="text-align: center">Your Pizza Status</h1>
           <b-field label="Email">
-            <b-input
-              v-model="person.email"
-              placeholder="Insert Email"
-            ></b-input>
+            <b-input v-model="email" placeholder="Insert Email"></b-input>
           </b-field>
-
-          <!-- <b-button
-              @click="showModal = true"
-              type="is-danger"
-              :disabled="isValid"
-              class="is-success"
-              v-on:click.native="postCustomer"
-              >Track</b-button
-            > -->
           <center>
             <b-button
-              @click="showModal = true"
+              @click="
+                showModal = true;
+                fetchData();
+              "
               type="is-danger"
               class="is-success button"
               >Track</b-button
@@ -37,14 +28,7 @@
           </transition>
           <transition appear name="slide">
             <div v-if="showModal" id="cek">
-              <h1 class="deliv">DELIVERY TO</h1>
-              <p>
-                Gg. Sukawarna II No. 18 c, Pajajaran, Cicendo, Bandung City,
-                West Java 40173
-              </p>
-              <p>0897654432</p>
-              <p>NoTelp</p>
-              <h1 class="pizza_status">Your Pizza Status: OTW</h1>
+              <h1>Status: <span id="statusOrder"></span></h1>
               <b-button
                 class="button"
                 @click="showModal = false"
@@ -52,6 +36,7 @@
               >
                 Close
               </b-button>
+              <b-button class="pay" type="is-danger"> Pay </b-button>
             </div>
           </transition>
         </div>
@@ -64,20 +49,34 @@
 import axios from "axios";
 
 export default {
-  name: "SignUp",
+  mounted() {
+    this.fetchData();
+  },
+  name: "App",
+  props: ["order"],
   data() {
     return {
-      person: {
-        email: "",
-      },
+      email: "",
+      orders: [],
       showModal: false,
     };
   },
   methods: {
-    // login method
-    login() {
-      const res = axios.post("/tracking");
-      console.log(res);
+    // tracking method
+    async fetchData() {
+      let status;
+      console.log("cek");
+      const res = await axios.get("/order/status?customer_email=" + this.email);
+      this.orders = res.data;
+      console.log(this.orders);
+      if (this.orders.status[this.orders.status.length - 1] == 0) {
+        status = "dimasak";
+      } else if (this.orders.status[this.orders.status.length - 1] == 1) {
+        status = "dikirim";
+      } else if (this.orders.status[this.orders.status.length - 1] == 2) {
+        status = "selesai";
+      }
+      document.getElementById("statusOrder").innerHTML = status;
     },
     isValid() {
       return true;
@@ -85,6 +84,19 @@ export default {
     toggleModal() {
       this.showModal = !this.showModal;
     },
+    // status() {
+    //   let status;
+    //   for (let i = 0; i < this.orders.status; i++) {
+    //     if (this.orders[i].status == 0) {
+    //       status = "dimasak";
+    //     } else if (this.orders[i].status == 1) {
+    //       status = "dikirim";
+    //     } else if (this.orders[i].status == 2) {
+    //       status = "selesai";
+    //     }
+    //     document.getElementById("statusOrder").innerHTML = status;
+    //   }
+    // },
   },
 };
 </script>
@@ -151,27 +163,18 @@ export default {
 
   padding: 25px;
 }
-p,
-h1 {
-  text-align: center;
-}
-
 .button {
   margin-top: 5%;
 }
 
-h1.deliv {
+h1 {
   color: rgb(87, 42, 42);
   font-size: 25px;
   font-weight: 900;
   margin-bottom: 1%;
-  text-align: left;
 }
 
-h1.pizza_status {
-  margin-top: 2%;
-  color: rgb(87, 42, 42);
-  font-size: 20px;
-  font-weight: 900;
+.pay {
+  margin-left: 30%;
 }
 </style>
