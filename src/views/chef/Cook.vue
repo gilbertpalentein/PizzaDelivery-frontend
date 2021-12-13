@@ -6,14 +6,14 @@
           <th>ID</th>
           <th>Pizza</th>
           <th>Quantity</th>
-          <th>Date</th>
+          <th>Total Harga</th>
           <th>Action</th>
         </tr>
         <tr v-for="order in orders.detailOrder" :key="order.id">
           <td>{{ order.id }}</td>
           <td>{{ order.pizza_id }}</td>
           <td>{{ order.quantity }}</td>
-          <td>{{ order.date }}</td>
+          <td>{{ order.total_harga }}</td>
           <td>
             <button
               class="button is-small is-light"
@@ -29,18 +29,6 @@
         </tr>
       </table>
     </center>
-    <!-- <b-table :data="data" :columns="columns" :hoverable="true" :striped="true">
-      <b-table-column field="action" label="Action" v-slot="props">
-        <button
-          class="button is-small is-light"
-          @click.prevent="done(props.row)"
-          style="background-image: linear-gradient(to right, #cc2e5d, #ff5858)"
-        >
-          <b-icon pack="fas" icon="check" size="is-small" type="is-light">
-          </b-icon>
-        </button>
-      </b-table-column>
-    </b-table> -->
   </div>
 </template>
 
@@ -60,8 +48,8 @@ export default {
   },
   methods: {
     async fetchData() {
-      const res = await axios.get("/order/active-orders");
-      this.orders = res.data;
+      const res = await axios.get("/order/active");
+      this.orders = res.data.data[0];
       console.log(this.orders);
     },
   },

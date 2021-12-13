@@ -3,7 +3,7 @@
     <div class="container">
       <div class="box">
         <div class="is-column6" style="padding: 2rem">
-          <h1 class="title" style="text-align: center">Deliver</h1>
+          <h1 class="title" style="text-align: center">View Order</h1>
           <b-field label="Order Id">
             <b-input v-model="order_id">{{ order_id }}</b-input>
           </b-field>
@@ -13,7 +13,7 @@
               type="is-danger"
               class="is-success button"
               v-on:click="fetchData"
-              >Confirm Payment</b-button
+              >View Order</b-button
             >
           </center>
         </div>
@@ -34,9 +34,16 @@ export default {
   },
   methods: {
     async fetchData() {
-      const res = await axios.put("/payment/" + this.order_id);
-      this.data = res.data;
-      this.$buefy.dialog.alert("Payment Success")
+      const res = await axios.get("/order/detail/" + this.order_id);
+      this.data = res.data.data[0];
+      console.log(this.data);
+      this.$buefy.dialog.alert('Orders' 
+        + '<br> ID  : ' + this.data.id
+        + '<br> Pizza ID  : ' + this.data.pizza_id
+        + '<br> Order ID  : ' + this.data.order_id
+        + '<br> Quantity  : ' + this.data.quantity
+        + '<br> Total Harga  : ' + this.data.total_harga
+      )
     },
   },
 };

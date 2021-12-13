@@ -1,14 +1,24 @@
 <template>
     <div class="table">
-        <br>
-        Filter <input type="text" v-model="search" class="form-control" />
-        <b-table
-            :data="data" 
-            :columns="columns" 
-            :hoverable="true"
-            :striped="true"
-        >
-        </b-table>
+    <br>
+    Filter <input type="text" v-model="search" class="form-control" />
+    <span style="margin-left: 0.5rem" v-on:click="fetchSpecific">
+        <button class="btn">Filter</button>
+    </span>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Customer Email</th>
+          <th>Date</th>
+          <th>Address</th>
+        </tr>
+        <tr v-for="log in data" :key="log.id">
+          <td>{{ log.id }}</td>
+          <td>{{ log.customer_email }}</td>
+          <td>{{ log.waktu }}</td>
+          <td>{{ log.alamat }}</td>
+        </tr>
+      </table>
     </div>
 </template>
 
@@ -16,53 +26,23 @@
 import axios from "axios";
 
 export default {
+  mounted() {
+    this.fetchData();
+  },
     data() {
         return {
             search: '',
-            data: [
-                { 'id': 1, 'cust_email': 'cust1@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                { 'id': 2, 'cust_email': 'cust2@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                { 'id': 3, 'cust_email': 'cust3@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                { 'id': 4, 'cust_email': 'cust4@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                { 'id': 5, 'cust_email': 'cust5@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-            ],
-            columns: [
-                {
-                    field: 'id',
-                    label: 'ID',
-                    width: '40',
-                    numeric: true
-                },
-                {
-                    field: 'cust_email',
-                    label: 'Customer Email',
-                },
-                {
-                    field: 'date',
-                    label: 'Date',
-                    centered: true
-                },
-                {
-                    field: 'address',
-                    label: 'Address',
-                },
-            ]
+            data: [],
         }
     },
     methods: {
         async fetchData() {
-            const res = await axios.get("/log");
-            this.orders = res.data;
-            console.log(this.orders);
+            const res = await axios.get("/transaction/finished");
+            this.data = res.data.data[0];
         },
         async fetchSpecific() {
-            const res = await axios.get("/log", {
-                params: {
-                    search: this.search
-                }
-            });
-            this.orders = res.data;
-            console.log(this.orders);
+            const res = await axios.get("/transaction/pizza/" + this.search);
+            this.data = res.data.data[0];
         },
     },
 };
