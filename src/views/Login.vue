@@ -21,9 +21,8 @@
           <center>
             <b-button
               type="is-danger"
-              :disabled="isValid"
               class="is-success"
-              v-on:click.native="postCustomer"
+              v-on:click="submitForm"
               >Login</b-button
             >
           </center>
@@ -35,6 +34,7 @@
 
 <script>
 import axios from "axios";
+import LoginService from "../services/LoginService";
 
 export default {
   name: "SignUp",
@@ -44,13 +44,26 @@ export default {
         email: "",
         password: "",
       },
+      data: [],
+      loginService: new LoginService(),
     };
   },
   methods: {
-    // login method
-    login() {
-      const res = axios.post("/login");
-      console.log(res);
+    submitForm() {
+      let tipeUser;
+      axios
+        .post("/login", {
+          email: this.person.email,
+          password: this.person.password,
+        })
+        .then((response) => {
+          tipeUser = response.data.userType;
+          this.loginService.addToUserType(tipeUser);
+          location.replace("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     isValid() {
       return true;

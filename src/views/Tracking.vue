@@ -65,7 +65,6 @@ export default {
     // tracking method
     async fetchData() {
       let status;
-      console.log("cek");
       const res = await axios.get("/order/status?customer_email=" + this.email);
       this.orders = res.data;
       console.log(this.orders);
