@@ -1,114 +1,62 @@
 <template>
-  <div class="table">
-    <center>
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Pizza</th>
-          <th>Quantity</th>
-          <th>Date</th>
-          <th>Address</th>
-          <th>Phone Number</th>
-          <th>Action</th>
-        </tr>
-        <tr v-for="pizza in data" :key="pizza.id">
-          <td>{{ pizza.id }}</td>
-          <td>{{ pizza.pizza_order }}</td>
-          <td>{{ pizza.quantity }}</td>
-          <td>{{ pizza.date }}</td>
-          <td>{{ pizza.address }}</td>
-          <td>{{ pizza.phone_number }}</td>
-          <td>
-            <button
-              class="button is-small is-light"
-              @click.prevent="done(props.row)"
-              style="
-                background-image: linear-gradient(to right, #cc2e5d, #ff5858);
-              "
+  <div class="background">
+    <div class="container">
+      <div class="box">
+        <div class="is-column6" style="padding: 2rem">
+          <h1 class="title" style="text-align: center">Deliver</h1>
+          <b-field label="Order Id">
+            <b-input v-model="order_id">{{ order_id }}</b-input>
+          </b-field>
+          
+          <center>
+            <b-button
+              type="is-danger"
+              class="is-success button"
+              v-on:click="fetchData"
+              >Confirm Payment</b-button
             >
-              <b-icon pack="fas" icon="check" size="is-small" type="is-light">
-              </b-icon>
-            </button>
-          </td>
-        </tr>
-      </table>
-    </center>
-    <!-- <b-table :data="data" :columns="columns" :hoverable="true" :striped="true">
-      <b-table-column field="action" label="Action" v-slot="props">
-        <button
-          class="button is-small is-light"
-          @click.prevent="done(props.row)"
-          style="background-image: linear-gradient(to right, #cc2e5d, #ff5858)"
-        >
-          <b-icon pack="fas" icon="check" size="is-small" type="is-light">
-          </b-icon>
-        </button>
-      </b-table-column>
-    </b-table> -->
+          </center>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  props: ["order"],
   data() {
     return {
-      data: [
-        {
-          id: 1,
-          cust_name: "Gilbert",
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-          address: "Pluto",
-          phone_number: "08982321312",
-        },
-        {
-          id: 1,
-          cust_name: "Gilbert",
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-          address: "Pluto",
-          phone_number: "08982321312",
-        },
-        {
-          id: 1,
-          cust_name: "Gilbert",
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-          address: "Pluto",
-          phone_number: "08982321312",
-        },
-        {
-          id: 1,
-          cust_name: "Gilbert",
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-          address: "Pluto",
-          phone_number: "08982321312",
-        },
-        {
-          id: 1,
-          cust_name: "Gilbert",
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-          address: "Pluto",
-          phone_number: "08982321312",
-        },
-      ],
+      order_id: 1,
+      data: [],
     };
+  },
+  methods: {
+    async fetchData() {
+      const res = await axios.put("/payment/" + this.order_id);
+      this.data = res.data;
+      this.$buefy.dialog.alert("Payment Success")
+    },
   },
 };
 </script>
-<style scoped>
-table {
-  width: 100%;
+
+<style>
+.container {
+  width: 450px;
+  height: 320px;
+  margin: 10% auto;
+  background-color: rgba(250, 250, 250, 0.295);
 }
-button {
-  margin-left: 7%;
+.background {
+  background-image: url("../../assets/about/about_bg.png");
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-size: cover;
+}
+.box {
+  margin: 5%;
+  margin-top: 10px;
 }
 </style>
