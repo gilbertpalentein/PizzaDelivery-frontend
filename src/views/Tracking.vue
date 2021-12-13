@@ -74,6 +74,10 @@ export default {
         status = "dikirim";
       } else if (this.orders.status[this.orders.status.length - 1] == 2) {
         status = "selesai";
+      } else if (this.orders.status[this.orders.status.length - 1] == 3) {
+        status = "belum dimasak";
+      } else if (this.orders.status[this.orders.status.length - 1] == 4) {
+        status = "Pesanan dibatalkan";
       }
       document.getElementById("statusOrder").innerHTML = status;
     },
@@ -83,19 +87,6 @@ export default {
     toggleModal() {
       this.showModal = !this.showModal;
     },
-    // status() {
-    //   let status;
-    //   for (let i = 0; i < this.orders.status; i++) {
-    //     if (this.orders[i].status == 0) {
-    //       status = "dimasak";
-    //     } else if (this.orders[i].status == 1) {
-    //       status = "dikirim";
-    //     } else if (this.orders[i].status == 2) {
-    //       status = "selesai";
-    //     }
-    //     document.getElementById("statusOrder").innerHTML = status;
-    //   }
-    // },
   },
 };
 </script>

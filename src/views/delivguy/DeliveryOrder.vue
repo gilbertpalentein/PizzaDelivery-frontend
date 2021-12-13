@@ -4,24 +4,20 @@
       <table>
         <tr>
           <th>ID</th>
-          <th>Pizza</th>
-          <th>Quantity</th>
+          <th>Customer Email</th>
           <th>Date</th>
           <th>Address</th>
-          <th>Phone Number</th>
           <th>Action</th>
         </tr>
-        <tr v-for="pizza in data" :key="pizza.id">
-          <td>{{ pizza.id }}</td>
-          <td>{{ pizza.pizza_order }}</td>
-          <td>{{ pizza.quantity }}</td>
-          <td>{{ pizza.date }}</td>
-          <td>{{ pizza.address }}</td>
-          <td>{{ pizza.phone_number }}</td>
-          <td>
+        <tr v-for="pizza in orderData" :key="pizza.id">
+          <td v-if="pizza.status == 0">{{ pizza.id }}</td>
+          <td v-if="pizza.status == 0">{{ pizza.customer_email }}</td>
+          <td v-if="pizza.status == 0">{{ pizza.waktu }}</td>
+          <td v-if="pizza.status == 0">{{ pizza.alamat }}</td>
+          <td v-if="pizza.status == 0">
             <button
               class="button is-small is-light"
-              @click.prevent="done(props.row)"
+              v-on:click="onProcess(pizza.id)"
               style="
                 background-image: linear-gradient(to right, #cc2e5d, #ff5858);
               "
@@ -33,82 +29,45 @@
         </tr>
       </table>
     </center>
-    <!-- <b-table :data="data" :columns="columns" :hoverable="true" :striped="true">
-      <b-table-column field="action" label="Action" v-slot="props">
-        <button
-          class="button is-small is-light"
-          @click.prevent="done(props.row)"
-          style="background-image: linear-gradient(to right, #cc2e5d, #ff5858)"
-        >
-          <b-icon pack="fas" icon="check" size="is-small" type="is-light">
-          </b-icon>
-        </button>
-      </b-table-column>
-    </b-table> -->
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+  mounted() {
+    this.fetchData();
+  },
   props: ["order"],
   data() {
     return {
-      data: [
-        {
-          id: 1,
-          cust_name: "Gilbert",
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-          address: "Pluto",
-          phone_number: "08982321312",
-        },
-        {
-          id: 1,
-          cust_name: "Gilbert",
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-          address: "Pluto",
-          phone_number: "08982321312",
-        },
-        {
-          id: 1,
-          cust_name: "Gilbert",
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-          address: "Pluto",
-          phone_number: "08982321312",
-        },
-        {
-          id: 1,
-          cust_name: "Gilbert",
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-          address: "Pluto",
-          phone_number: "08982321312",
-        },
-        {
-          id: 1,
-          cust_name: "Gilbert",
-          pizza_order: "Beef Delight",
-          quantity: 1,
-          date: " 	2021-11-25 14:35:42",
-          address: "Pluto",
-          phone_number: "08982321312",
-        },
-      ],
+      orderData: [],
     };
+  },
+  methods: {
+    async fetchData() {
+      const res = await axios.get("/order/allorder");
+      this.orderData = res.data.dataOrder;
+    },
+    onProcess(id) {
+      console.log(id);
+      for (let i = 0; i < this.orderData.length; i++) {
+        if (this.orderData[i].id == id) {
+          this.orderData[i].status = 2;
+          axios.put("/order/" + id, this.orderData[i]);
+          const res = axios.get("/order/allorder");
+          this.orderData = res.data.dataOrder;
+          break;
+        }
+      }
+    },
   },
 };
 </script>
 <style scoped>
 table {
   width: 100%;
-}
-button {
-  margin-left: 7%;
+  text-align: center;
 }
 </style>
