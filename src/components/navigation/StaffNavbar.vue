@@ -21,6 +21,16 @@
         </b-icon>
         <span style="margin-left: 0.5rem">Process Orders</span>
       </b-navbar-item>
+      <b-navbar-item href="/staff/view">
+        <b-icon
+          pack="fas"
+          icon="shopping-cart"
+          size="is-small"
+          type="is-primary"
+        >
+        </b-icon>
+        <span style="margin-left: 0.5rem">View Order</span>
+      </b-navbar-item>
       <b-navbar-item href="">
         <b-icon pack="fas" icon="user" size="is-small" type="is-primary">
         </b-icon>
