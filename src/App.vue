@@ -26,6 +26,7 @@ import OwnerNavbar from "./components/navigation/OwnerNavbar";
 import StaffNavbar from "./components/navigation/StaffNavbar";
 import ChefNavbar from "./components/navigation/ChefNavbar";
 import DeliveryNavbar from "./components/navigation/DeliveryNavbar";
+import LoginService from "./services/LoginService";
 
 import Footer from "./components/Footer";
 export default {
@@ -33,8 +34,12 @@ export default {
     this.fetchData();
   },
   data: () => {
+    const data = [];
     return {
       userType: "",
+      loginService: new LoginService(),
+
+      data,
     };
   },
   components: {
@@ -47,11 +52,7 @@ export default {
   },
   methods: {
     async fetchData() {
-      this.userType = "customer";
-      //  this.userType = 'owner'
-      // this.userType = 'staff'
-      // this.userType = "chef";
-      // this.userType = 'delivery'
+      this.userType = this.loginService.getCurrentUserType();
     },
     async getUserType() {
       return this.userType;
