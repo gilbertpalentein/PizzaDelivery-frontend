@@ -61,7 +61,7 @@ export default {
   methods: {
     async fetchData() {
       const res = await axios.get("/order/active-orders");
-      this.orders = res.data;
+      this.orders = res;
       console.log(this.orders);
     },
   },

@@ -12,6 +12,7 @@ import About from '../views/About.vue';
 import Tracking from '../views/Tracking.vue';
 // Staff
 import StaffProcess from '../views/staff/ProcessOrders.vue';
+import StaffView from '../views/staff/ViewOrder.vue';
 // Owner
 import TransactionLog from '../views/owner/TransactionLog.vue';
 import Income from '../views/owner/Income.vue';
@@ -57,6 +58,11 @@ const routes = [
     path: '/staff/process',
     name: 'StaffProcess',
     component: StaffProcess
+  },
+  {
+    path: '/staff/view',
+    name: 'StaffView',
+    component: StaffView
   },
   {
     path: '/owner/log',

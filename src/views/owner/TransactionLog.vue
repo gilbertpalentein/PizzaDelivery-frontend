@@ -2,6 +2,13 @@
     <div class="table">
         <br>
         Filter <input type="text" v-model="search" class="form-control" />
+            <b-button
+              type="is-danger"
+              class="is-success button"
+              v-on:click="fetchSpecific"
+              >Filter</b-button
+            >
+
         <b-table
             :data="data" 
             :columns="columns" 
@@ -16,16 +23,13 @@
 import axios from "axios";
 
 export default {
+  mounted() {
+    this.fetchData();
+  },
     data() {
         return {
             search: '',
-            data: [
-                { 'id': 1, 'cust_email': 'cust1@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                { 'id': 2, 'cust_email': 'cust2@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                { 'id': 3, 'cust_email': 'cust3@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                { 'id': 4, 'cust_email': 'cust4@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                { 'id': 5, 'cust_email': 'cust5@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-            ],
+            data: [],
             columns: [
                 {
                     field: 'id',
@@ -51,18 +55,15 @@ export default {
     },
     methods: {
         async fetchData() {
-            const res = await axios.get("/log");
+            const res = await axios.get("/transaction/finished");
             this.orders = res.data;
-            console.log(this.orders);
         },
         async fetchSpecific() {
-            const res = await axios.get("/log", {
-                params: {
-                    search: this.search
-                }
-            });
+            var FormData = require('form-data');
+            var data = new FormData();
+            data.append('pizza_id', this.search);
+            const res = await axios.get("/transaction/pizza", data);
             this.orders = res.data;
-            console.log(this.orders);
         },
     },
 };
