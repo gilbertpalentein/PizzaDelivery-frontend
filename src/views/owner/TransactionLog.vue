@@ -1,21 +1,24 @@
 <template>
     <div class="table">
-        <br>
-        Filter <input type="text" v-model="search" class="form-control" />
-            <b-button
-              type="is-danger"
-              class="is-success button"
-              v-on:click="fetchSpecific"
-              >Filter</b-button
-            >
-
-        <b-table
-            :data="data" 
-            :columns="columns" 
-            :hoverable="true"
-            :striped="true"
-        >
-        </b-table>
+    <br>
+    Filter <input type="text" v-model="search" class="form-control" />
+    <span style="margin-left: 0.5rem" v-on:click="fetchSpecific">
+        <button class="btn">Filter</button>
+    </span>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Customer Email</th>
+          <th>Date</th>
+          <th>Address</th>
+        </tr>
+        <tr v-for="log in data" :key="log.id">
+          <td>{{ log.id }}</td>
+          <td>{{ log.customer_email }}</td>
+          <td>{{ log.waktu }}</td>
+          <td>{{ log.alamat }}</td>
+        </tr>
+      </table>
     </div>
 </template>
 
@@ -30,40 +33,16 @@ export default {
         return {
             search: '',
             data: [],
-            columns: [
-                {
-                    field: 'id',
-                    label: 'ID',
-                    width: '40',
-                    numeric: true
-                },
-                {
-                    field: 'cust_email',
-                    label: 'Customer Email',
-                },
-                {
-                    field: 'date',
-                    label: 'Date',
-                    centered: true
-                },
-                {
-                    field: 'address',
-                    label: 'Address',
-                },
-            ]
         }
     },
     methods: {
         async fetchData() {
             const res = await axios.get("/transaction/finished");
-            this.orders = res.data;
+            this.data = res.data.data[0];
         },
         async fetchSpecific() {
-            var FormData = require('form-data');
-            var data = new FormData();
-            data.append('pizza_id', this.search);
-            const res = await axios.get("/transaction/pizza", data);
-            this.orders = res.data;
+            const res = await axios.get("/transaction/pizza/" + this.search);
+            this.data = res.data.data[0];
         },
     },
 };

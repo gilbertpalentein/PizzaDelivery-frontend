@@ -34,14 +34,10 @@ export default {
   },
   methods: {
     async fetchData() {
-      const res = await axios.get("/order/detail", {
-        params: {
-          order_id: this.order_id
-        }
-      });
-      this.data = res.data;
+      const res = await axios.get("/order/detail/" + this.order_id);
+      this.data = res.data.data[0];
       console.log(this.data);
-      this.$buefy.dialog.alert(this.data.message 
+      this.$buefy.dialog.alert('Orders' 
         + '<br> ID  : ' + this.data.id
         + '<br> Pizza ID  : ' + this.data.pizza_id
         + '<br> Order ID  : ' + this.data.order_id
