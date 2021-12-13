@@ -1,93 +1,92 @@
 <template>
-    <div class="table">
-        <b-table
-            :data="data" 
-            :columns="columns" 
-            :hoverable="true"
-            :striped="true"
-        >
-            <!-- ini kenapa ga muncul astaga -->
-            <b-table-column field="action">
-                <button class="button is-small is-light" @click.prevent="onProcess(props.row)">
-                    <b-icon
-                        pack="fas"
-                        icon="play"
-                        size="is-small"
-                        type="is-primary"
-                    >
-                    </b-icon>
-                </button>
-                <button class="button is-small is-danger" @click.prevent="onDelete(props.row)">
-                    <b-icon
-                        pack="fas"
-                        icon="trash"
-                        size="is-small"
-                        type="is-primary"
-                    >
-                    </b-icon>
-                </button>
-            </b-table-column>
-        </b-table>
-        
-        <!-- hapus ini kalau sudah muncul di action -->
-        <button class="button is-small is-light" @click.prevent="onProcess(props.row)">
-            <b-icon
-                pack="fas"
-                icon="play"
-                size="is-small"
-                type="is-primary"
+  <div class="table" id="app">
+    <center>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Customer Email</th>
+          <th>Date</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+        <tr v-for="pizza in orderData" :key="pizza.id">
+          <td v-if="pizza.status == 3">{{ pizza.id }}</td>
+          <td v-if="pizza.status == 3">{{ pizza.customer_email }}</td>
+          <td v-if="pizza.status == 3">{{ pizza.waktu }}</td>
+          <td v-if="pizza.status == 3">{{ pizza.alamat }}</td>
+          <td v-if="pizza.status == 3">
+            <button
+              class="button is-small is-light"
+              v-on:click="onProcess(pizza.id)"
             >
-            </b-icon>
-        </button>
-        <button class="button is-small is-danger" @click.prevent="onDelete(props.row)">
-            <b-icon
-                pack="fas"
-                icon="trash"
-                size="is-small"
-                type="is-primary"
+              <b-icon pack="fas" icon="play" size="is-small" type="is-primary">
+              </b-icon>
+            </button>
+            <button
+              class="button is-small is-danger second"
+              v-on:click="onDelete(pizza.id)"
             >
-            </b-icon>
-        </button>
-    </div>
+              <b-icon pack="fas" icon="trash" size="is-small" type="is-primary">
+              </b-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </div>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                data: [
-                    { 'id': 1, 'cust_email': 'cust1@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                    { 'id': 2, 'cust_email': 'cust2@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                    { 'id': 3, 'cust_email': 'cust3@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                    { 'id': 4, 'cust_email': 'cust4@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                    { 'id': 5, 'cust_email': 'cust5@gmail.com', 'date': ' 	2021-11-25 14:35:42', 'address': 'Pluto'},
-                ],
-                columns: [
-                    {
-                        field: 'id',
-                        label: 'ID',
-                        width: '40',
-                        numeric: true
-                    },
-                    {
-                        field: 'cust_email',
-                        label: 'Customer Email',
-                    },
-                    {
-                        field: 'date',
-                        label: 'Date',
-                        centered: true
-                    },
-                    {
-                        field: 'address',
-                        label: 'Address',
-                    },
-                    {
-                        field: 'action',
-                        label: 'Action',
-                    }
-                ]
-            }
+import axios from "axios";
+export default {
+  mounted() {
+    this.fetchData();
+  },
+  name: "App",
+  props: ["order"],
+  data() {
+    return {
+      orderData: [],
+    };
+  },
+  methods: {
+    async fetchData() {
+      const res = await axios.get("/order/allorder");
+      this.orderData = res.data.dataOrder;
+    },
+    onProcess(id) {
+      console.log(id);
+      for (let i = 0; i < this.orderData.length; i++) {
+        if (this.orderData[i].id == id) {
+          this.orderData[i].status = 0;
+          axios.put("/order/" + id, this.orderData[i]);
+          const res = axios.get("/order/allorder");
+          this.orderData = res.data.dataOrder;
+          break;
         }
-    }
+      }
+    },
+    onDelete(id) {
+      console.log(id);
+      for (let i = 0; i < this.orderData.length; i++) {
+        if (this.orderData[i].id == id) {
+          this.orderData[i].status = 4;
+          axios.put("/order/" + id, this.orderData[i]);
+          const res = axios.get("/order/allorder");
+          this.orderData = res.data.dataOrder;
+          break;
+        }
+      }
+    },
+  },
+};
 </script>
+<style scoped>
+table {
+  width: 100%;
+  text-align: center;
+}
+button.second {
+  margin-left: 5%;
+}
+</style>
