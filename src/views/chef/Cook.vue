@@ -17,7 +17,7 @@
           <td>
             <button
               class="button is-small is-light"
-              @click.prevent="done(props.row)"
+              v-on:click="onProcess(order.id)"
               style="
                 background-image: linear-gradient(to right, #cc2e5d, #ff5858);
               "
@@ -44,13 +44,27 @@ export default {
     return {
       orderInfo: [],
       orders: [],
+      orderData: [],
     };
   },
   methods: {
     async fetchData() {
       const res = await axios.get("/order/active");
       this.orders = res.data.data[0];
+      const res2 = await axios.get("/order/allorder");
+      this.orderData = res2.data.dataOrder;
       console.log(this.orders);
+    },
+    onProcess(id) {
+      console.log(id);
+      for (let i = 0; i < this.orderData.length; i++) {
+        if (this.orderData[i].id == id) {
+          this.orderData[i].status = 1;
+          axios.put("/order/" + id, this.orderData[i]);
+          window.location.reload();
+          break;
+        }
+      }
     },
   },
 };

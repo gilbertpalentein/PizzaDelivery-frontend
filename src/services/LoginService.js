@@ -16,6 +16,5 @@ export default class LoginService {
 
   removeUserType() {
     localStorage.removeItem(this.KEY)
-    console.log("test")
   }
 }

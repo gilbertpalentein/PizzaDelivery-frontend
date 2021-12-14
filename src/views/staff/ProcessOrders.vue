@@ -9,22 +9,22 @@
           <th>Address</th>
           <th>Action</th>
         </tr>
-        <tr v-for="pizza in orderData" :key="pizza.id">
-          <td v-if="pizza.status == 3">{{ pizza.id }}</td>
-          <td v-if="pizza.status == 3">{{ pizza.customer_email }}</td>
-          <td v-if="pizza.status == 3">{{ pizza.waktu }}</td>
-          <td v-if="pizza.status == 3">{{ pizza.alamat }}</td>
-          <td v-if="pizza.status == 3">
+        <tr v-for="order in orderData" :key="order.id">
+          <td v-if="order.status == 3">{{ order.id }}</td>
+          <td v-if="order.status == 3">{{ order.customer_email }}</td>
+          <td v-if="order.status == 3">{{ order.waktu }}</td>
+          <td v-if="order.status == 3">{{ order.alamat }}</td>
+          <td v-if="order.status == 3">
             <button
               class="button is-small is-light"
-              v-on:click="onProcess(pizza.id)"
+              v-on:click="onProcess(order.id)"
             >
               <b-icon pack="fas" icon="play" size="is-small" type="is-primary">
               </b-icon>
             </button>
             <button
               class="button is-small is-danger second"
-              v-on:click="onDelete(pizza.id)"
+              v-on:click="onDelete(order.id)"
             >
               <b-icon pack="fas" icon="trash" size="is-small" type="is-primary">
               </b-icon>
@@ -55,7 +55,6 @@ export default {
       this.orderData = res.data.dataOrder;
     },
     onProcess(id) {
-      console.log(id);
       for (let i = 0; i < this.orderData.length; i++) {
         if (this.orderData[i].id == id) {
           this.orderData[i].status = 0;
@@ -67,7 +66,6 @@ export default {
       }
     },
     onDelete(id) {
-      console.log(id);
       for (let i = 0; i < this.orderData.length; i++) {
         if (this.orderData[i].id == id) {
           this.orderData[i].status = 4;
