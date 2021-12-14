@@ -158,7 +158,6 @@
               >Cancel</b-button
             >
             <b-button
-              :disabled="form.method == ''"
               type="is-primary"
               @click="postTransaction()"
               >Continue to Pay
@@ -248,7 +247,7 @@ export default {
           quantity,
         }));
       console.log(orders);
-      await axios.post("/transactions", orders);
+      await axios.post("/order/create", orders);
       alert("Payment Successful!");
       this.isComponentModalActive = false;
     },
